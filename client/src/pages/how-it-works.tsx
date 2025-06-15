@@ -12,8 +12,8 @@ export default function HowItWorks() {
       metaDescription.setAttribute('content', 'Learn how SalesAIde\'s 3-step AI process transforms retail data into automated growth. Data analysis, content generation, and continuous optimization for 40% sales increases.');
     }
   }, []);
-  const scrollToContact = () => {
-    window.location.href = "/#contact";
+  const navigateToContact = () => {
+    window.location.href = "/contact-us";
   };
 
   return (
@@ -359,7 +359,7 @@ export default function HowItWorks() {
                 </div>
               </div>
               <Button
-                onClick={scrollToContact}
+                onClick={navigateToContact}
                 className="bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-secondary transition-colors"
                 size="lg"
               >

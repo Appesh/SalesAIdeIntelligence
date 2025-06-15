@@ -15,7 +15,7 @@ export function Navigation({ currentSection }: NavigationProps) {
     { href: "/", label: "Home" },
     { href: "/solutions", label: "Solutions" },
     { href: "/how-it-works", label: "How It Works" },
-    { href: "#why-choose", label: "Why Choose Us" },
+    { href: "/why-choose-us", label: "Why Choose Us" },
   ];
 
   const handleNavigation = (href: string) => {
@@ -68,12 +68,12 @@ export function Navigation({ currentSection }: NavigationProps) {
               </Link>
             )
           ))}
-          <Button
-            onClick={() => handleNavigation("#contact")}
-            className="bg-primary text-white hover:bg-secondary"
+          <Link
+            href="/contact-us"
+            className="bg-primary text-white hover:bg-secondary px-4 py-2 rounded-md font-medium transition-colors inline-flex items-center"
           >
             Contact Us
-          </Button>
+          </Link>
         </div>
       </div>
 
@@ -121,12 +121,13 @@ export function Navigation({ currentSection }: NavigationProps) {
                 </Link>
               )
             ))}
-            <Button
-              onClick={() => handleNavigation("#contact")}
-              className="w-full bg-primary text-white hover:bg-secondary"
+            <Link
+              href="/contact-us"
+              className="w-full bg-primary text-white hover:bg-secondary px-4 py-2 rounded-md font-medium transition-colors inline-flex items-center justify-center"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact Us
-            </Button>
+            </Link>
           </div>
         </div>
       )}

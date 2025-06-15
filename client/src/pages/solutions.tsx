@@ -12,8 +12,8 @@ export default function Solutions() {
       metaDescription.setAttribute('content', 'Discover SalesAIde\'s comprehensive AI-powered retail solutions: intelligent sales boosting, smart seasonal campaigns, and automated content creation. Increase revenue by 40% with our proven retail AI platform.');
     }
   }, []);
-  const scrollToContact = () => {
-    window.location.href = "/#contact";
+  const navigateToContact = () => {
+    window.location.href = "/contact-us";
   };
 
   return (
@@ -261,7 +261,7 @@ export default function Solutions() {
                 Start your free trial and see how SalesAIde's AI solutions can boost your sales by 40% in the first month.
               </p>
               <Button
-                onClick={scrollToContact}
+                onClick={navigateToContact}
                 className="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                 size="lg"
               >
