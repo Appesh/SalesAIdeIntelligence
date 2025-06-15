@@ -162,7 +162,7 @@ export default function WhyChooseUs() {
                   </div>
                 </div>
                 <div>
-                  <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mb-6">
+                  <div className="w-18 h-18 bg-accent rounded-xl flex items-center justify-center mb-6 icon-btn-enhanced animate-float">
                     <Settings className="text-white" size={32} />
                   </div>
                   <h3 className="text-3xl font-bold text-gray-900 mb-4">

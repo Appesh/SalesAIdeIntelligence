@@ -51,6 +51,12 @@ export default {
           "4": "var(--chart-4)",
           "5": "var(--chart-5)",
         },
+        // Wegic-inspired color palette
+        "wegic-purple": "var(--wegic-purple)",
+        "wegic-pink": "var(--wegic-pink)",
+        "wegic-yellow": "var(--wegic-yellow)",
+        "wegic-green": "var(--wegic-green)",
+        "wegic-blue": "var(--wegic-blue)",
         sidebar: {
           DEFAULT: "var(--sidebar-background)",
           foreground: "var(--sidebar-foreground)",

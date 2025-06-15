@@ -51,37 +51,37 @@ export function Solutions() {
   };
 
   return (
-    <section id="solutions" className="py-20 bg-white">
+    <section id="solutions" className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Key Benefits: Why Retail Leaders Choose SalesAIde
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            Key Benefits: Why Retail Leaders Choose <span className="gradient-wegic bg-clip-text text-transparent gradient-text-force">SalesAIde</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
             Our automated retail solutions deliver measurable results across every aspect of your business. No manual work required.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {solutions.map((solution) => (
             <div
               key={solution.id}
-              className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
+              className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-8 card-hover shadow-lg"
             >
-              <div className={`w-12 h-12 ${solution.iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              <div className={`w-18 h-18 ${solution.iconColor} rounded-2xl flex items-center justify-center mb-6 animate-float icon-btn-enhanced`}>
                 {getIcon(solution.icon)}
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {solution.title}
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                {solution.title.replace(/\*\*/g, '')}
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
                 {solution.description}
               </p>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-3 text-gray-700">
                 {solution.features.map((feature, index) => (
                   <li key={index} className="flex items-center">
-                    <Check className="text-success mr-2" size={16} />
-                    <span>{feature}</span>
+                    <Check className="text-wegic-green mr-3" size={20} />
+                    <span className="font-medium">{feature}</span>
                   </li>
                 ))}
               </ul>

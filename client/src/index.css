@@ -13,14 +13,19 @@
   --card-foreground: hsl(20, 14.3%, 4.1%);
   --border: hsl(20, 5.9%, 90%);
   --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(221, 83%, 53%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(225, 67%, 45%);
-  --secondary-foreground: hsl(60, 9.1%, 97.8%);
-  --accent: hsl(188, 94%, 42%);
-  --accent-foreground: hsl(24, 9.8%, 10%);
-  --success: hsl(142, 76%, 36%);
-  --success-foreground: hsl(60, 9.1%, 97.8%);
+  --primary: hsl(260, 100%, 65%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(320, 100%, 70%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(45, 100%, 60%);
+  --accent-foreground: hsl(0, 0%, 0%);
+  --success: hsl(150, 100%, 50%);
+  --success-foreground: hsl(0, 0%, 0%);
+  --wegic-purple: hsl(260, 100%, 65%);
+  --wegic-pink: hsl(320, 100%, 70%);
+  --wegic-yellow: hsl(45, 100%, 60%);
+  --wegic-green: hsl(150, 100%, 50%);
+  --wegic-blue: hsl(200, 100%, 60%);
   --destructive: hsl(0, 84.2%, 60.2%);
   --destructive-foreground: hsl(60, 9.1%, 97.8%);
   --ring: hsl(20, 14.3%, 4.1%);
@@ -114,5 +119,475 @@
   
   .hover\:border-primary:hover {
     border-color: hsl(var(--primary));
+  }
+
+  /* Wegic-inspired utilities */
+  .bg-wegic-purple {
+    background-color: hsl(var(--wegic-purple));
+  }
+
+  .bg-wegic-pink {
+    background-color: hsl(var(--wegic-pink));
+  }
+
+  .bg-wegic-yellow {
+    background-color: hsl(var(--wegic-yellow));
+  }
+
+  .bg-wegic-green {
+    background-color: hsl(var(--wegic-green));
+  }
+
+  .bg-wegic-blue {
+    background-color: hsl(var(--wegic-blue));
+  }
+
+  .text-wegic-purple {
+    color: hsl(var(--wegic-purple));
+  }
+
+  .text-wegic-pink {
+    color: hsl(var(--wegic-pink));
+  }
+
+  .gradient-wegic {
+    background: linear-gradient(135deg, hsl(var(--wegic-purple)), hsl(var(--wegic-pink)));
+  }
+
+  .gradient-wegic-alt {
+    background: linear-gradient(135deg, hsl(var(--wegic-blue)), hsl(var(--wegic-green)));
+  }
+
+  /* Enhanced gradient text implementation */
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Improved fallback for gradient text */
+  @supports not (-webkit-background-clip: text) {
+    .gradient-wegic.bg-clip-text {
+      background: none !important;
+      color: hsl(var(--wegic-purple)) !important;
+      -webkit-text-fill-color: unset !important;
+    }
+  }
+
+  /* Additional fallback for older browsers */
+  .gradient-wegic.bg-clip-text.text-transparent {
+    background: linear-gradient(135deg, hsl(var(--wegic-purple)), hsl(var(--wegic-pink)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
+  /* Force gradient text visibility */
+  .gradient-text-force {
+    background: linear-gradient(135deg, hsl(260, 100%, 65%), hsl(320, 100%, 70%)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    display: inline-block !important;
+  }
+
+  /* Alternative gradient text implementation for maximum compatibility */
+  .gradient-wegic-text {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-weight: inherit;
+  }
+
+  /* Ensure gradient backgrounds work properly */
+  .gradient-wegic-bg {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  }
+
+  /* Enhanced shadows */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Enhanced borders */
+  .border-3 {
+    border-width: 3px;
+  }
+
+  /* Enhanced Wegic colors with more vibrancy */
+  .bg-wegic-purple-enhanced {
+    background-color: #7c3aed;
+  }
+
+  .bg-wegic-pink-enhanced {
+    background-color: #e11d48;
+  }
+
+  .bg-wegic-green-enhanced {
+    background-color: #059669;
+  }
+
+  .bg-wegic-blue-enhanced {
+    background-color: #0284c7;
+  }
+
+  .bg-wegic-yellow-enhanced {
+    background-color: #d97706;
+  }
+
+  /* Enhanced icon containers */
+  .icon-container-enhanced {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .icon-container-enhanced:hover {
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.4);
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  /* Enhanced button styling */
+  .btn-enhanced {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    border: none;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-enhanced:hover {
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .btn-outline-enhanced {
+    background: white;
+    border: 3px solid #8b5cf6;
+    color: #8b5cf6;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-enhanced:hover {
+    background: #8b5cf6;
+    color: white;
+    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Chat interface alignment improvements */
+  .chat-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1024px) {
+    .chat-container {
+      margin: 0;
+    }
+  }
+
+  /* Chat message improvements */
+  .chat-message-left {
+    margin-right: auto;
+  }
+
+  .chat-message-right {
+    margin-left: auto;
+  }
+
+  /* Ensure proper text wrapping in chat messages */
+  .chat-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Enhanced outline button styling */
+  .btn-outline-white {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+
+  .btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f2937;
+    border-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Enhanced gradient outline button */
+  .btn-outline-gradient {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #8b5cf6, #ec4899) 1;
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+
+  .btn-outline-gradient:hover {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white;
+    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Premium button styling */
+  .btn-premium {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-premium:hover::before {
+    left: 100%;
+  }
+
+  .btn-premium:hover {
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px) scale(1.03);
+  }
+
+  /* Glass button effect */
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Enhanced icon button styling */
+  .icon-btn-enhanced {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .icon-btn-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  .icon-btn-enhanced:hover::before {
+    left: 100%;
+  }
+
+  .icon-btn-enhanced:hover {
+    box-shadow: 0 20px 45px rgba(139, 92, 246, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Custom size utilities */
+  .w-18 {
+    width: 4.5rem; /* 72px */
+  }
+
+  .h-18 {
+    height: 4.5rem; /* 72px */
+  }
+
+  /* Icon button variants */
+  .icon-btn-primary {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.3);
+  }
+
+  .icon-btn-secondary {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+    box-shadow: 0 15px 35px rgba(236, 72, 153, 0.3);
+  }
+
+  .icon-btn-success {
+    background: linear-gradient(135deg, #059669, #10b981);
+    box-shadow: 0 15px 35px rgba(5, 150, 105, 0.3);
+  }
+
+  .icon-btn-warning {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3);
+  }
+
+  /* Interactive icon button with pulse effect */
+  .icon-btn-interactive {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .icon-btn-interactive::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .icon-btn-interactive:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .icon-btn-interactive:hover {
+    box-shadow: 0 20px 45px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px) scale(1.08);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Chat-specific animations */
+  @keyframes chat-slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes chat-bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes chat-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+    }
+  }
+
+  .chat-slide-up {
+    animation: chat-slide-up 0.3s ease-out;
+  }
+
+  .chat-bounce-in {
+    animation: chat-bounce-in 0.6s ease-out;
+  }
+
+  .chat-pulse {
+    animation: chat-pulse 2s infinite;
+  }
+
+  /* Floating animation enhancement */
+  @keyframes float-enhanced {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(2deg);
+    }
+  }
+
+  .animate-float-enhanced {
+    animation: float-enhanced 4s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+
+  /* Simple chat animations */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
 }

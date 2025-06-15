@@ -34,3 +34,64 @@ export interface ContactFormData {
   businessType: string;
   message: string;
 }
+
+export interface ChatMessage {
+  id: string;
+  content: string;
+  sender: 'user' | 'agent';
+  timestamp: Date;
+  type?: 'text' | 'options' | 'form' | 'lead-form';
+  options?: string[];
+  metadata?: {
+    intent?: string;
+    confidence?: number;
+    followUp?: string;
+  };
+}
+
+export interface ChatSession {
+  id: string;
+  messages: ChatMessage[];
+  isActive: boolean;
+  startedAt: Date;
+  userInfo?: {
+    name?: string;
+    email?: string;
+    company?: string;
+    phone?: string;
+    businessType?: string;
+    interests?: string[];
+  };
+  context?: {
+    currentTopic?: string;
+    qualificationStage?: 'initial' | 'needs-assessment' | 'solution-matching' | 'lead-capture' | 'demo-scheduling';
+    userIntent?: string;
+    businessSize?: 'small' | 'medium' | 'enterprise';
+    painPoints?: string[];
+    budget?: string;
+    timeline?: string;
+  };
+}
+
+export interface ChatState {
+  isOpen: boolean;
+  session: ChatSession | null;
+  isTyping: boolean;
+  unreadCount: number;
+}
+
+export interface ConversationContext {
+  previousMessages: ChatMessage[];
+  userInfo: ChatSession['userInfo'];
+  sessionContext: ChatSession['context'];
+  currentIntent?: string;
+}
+
+export interface AgentResponse {
+  content: string;
+  type?: 'text' | 'options' | 'form' | 'lead-form';
+  options?: string[];
+  followUpQuestions?: string[];
+  contextUpdate?: Partial<ChatSession['context']>;
+  userInfoUpdate?: Partial<ChatSession['userInfo']>;
+}
