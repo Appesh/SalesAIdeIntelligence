@@ -48,7 +48,7 @@ export function Header() {
             <Navigation currentSection={currentSection} />
             <Button
               onClick={scrollToContact}
-              className="gradient-wegic-bg text-white px-6 py-3 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
+              size="default"
             >
               <Sparkles className="mr-2 h-4 w-4" />
               Build Your Growth

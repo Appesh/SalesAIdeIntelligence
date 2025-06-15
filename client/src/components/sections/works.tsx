@@ -100,7 +100,8 @@ export function Works() {
                   
                   <Button
                     variant="outline"
-                    className="btn-outline-white px-6 py-3 rounded-xl"
+                    className="btn-outline-white"
+                    size="default"
                   >
                     View Case Study
                     <ExternalLink className="ml-2 h-4 w-4" />
@@ -141,7 +142,7 @@ export function Works() {
           <h3 className="text-3xl font-bold text-gray-900 mb-4">
             Bring your sales ideas to life with your AI team
           </h3>
-          <Button className="gradient-wegic text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
+          <Button size="lg" className="btn-special-glow">
             Chat for Free!
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>

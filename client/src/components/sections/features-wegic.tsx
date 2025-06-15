@@ -132,7 +132,7 @@ export function FeaturesWegic() {
               <p className="text-xl text-gray-700">✅ Providing 24/7 optimization</p>
               <p className="text-xl text-gray-700">✅ Supporting your growth goals</p>
             </div>
-            <Button className="gradient-wegic-bg text-white px-10 py-6 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl">
+            <Button size="xl" className="btn-special-glow">
               Get your AI sales team now
               <ArrowRight className="ml-3 h-6 w-6" />
             </Button>

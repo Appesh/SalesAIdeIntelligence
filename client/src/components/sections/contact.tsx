@@ -220,7 +220,7 @@ export function Contact() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-primary text-white hover:bg-secondary"
+                  className="w-full"
                   size="lg"
                   disabled={contactMutation.isPending}
                 >

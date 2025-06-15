@@ -70,14 +70,14 @@ export const sessionConfig = {
 
 // Helmet security configuration
 export const helmetConfig = {
-  contentSecurityPolicy: {
+  contentSecurityPolicy: isDevelopment() ? false : {
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
-      scriptSrc: ["'self'"],
-      connectSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      connectSrc: ["'self'", "ws:", "wss:"],
     },
   },
   crossOriginEmbedderPolicy: false,

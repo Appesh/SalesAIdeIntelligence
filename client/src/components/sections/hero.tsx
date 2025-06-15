@@ -42,15 +42,14 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-6 mb-12">
               <Button
                 onClick={scrollToContact}
-                className="btn-enhanced text-white px-10 py-6 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300"
                 size="lg"
+                className="btn-special-glow"
               >
                 <Zap className="mr-3 h-6 w-6" />
                 Start Growing Via Chat
               </Button>
               <Button
                 variant="outline"
-                className="btn-outline-enhanced px-10 py-6 rounded-2xl font-bold text-lg transition-all duration-300"
                 size="lg"
               >
                 <Play className="mr-3 h-6 w-6" />

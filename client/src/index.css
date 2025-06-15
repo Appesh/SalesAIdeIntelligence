@@ -151,12 +151,14 @@
   }
 
   .gradient-wegic {
-    background: linear-gradient(135deg, hsl(var(--wegic-purple)), hsl(var(--wegic-pink)));
+    background: linear-gradient(135deg, hsl(var(--wegic-purple)), hsl(var(--wegic-pink))) !important;
   }
 
   .gradient-wegic-alt {
-    background: linear-gradient(135deg, hsl(var(--wegic-blue)), hsl(var(--wegic-green)));
+    background: linear-gradient(135deg, hsl(var(--wegic-blue)), hsl(var(--wegic-green))) !important;
   }
+
+  /* Legacy gradient classes - now handled by Button component */
 
   /* Enhanced gradient text implementation */
   .bg-clip-text {
@@ -208,8 +210,10 @@
 
   /* Ensure gradient backgrounds work properly */
   .gradient-wegic-bg {
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    background: linear-gradient(135deg, #8b5cf6, #ec4899) !important;
   }
+
+  /* Legacy gradient-bg classes - now handled by Button component */
 
   /* Enhanced shadows */
   .shadow-3xl {
@@ -254,18 +258,44 @@
     transform: translateY(-2px) scale(1.05);
   }
 
-  /* Enhanced button styling */
-  .btn-enhanced {
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
-    border: none;
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-    transition: all 0.3s ease;
+  /* Modern Button System - Clean and Consistent */
+
+  /* Remove conflicting button styles - now handled by button component */
+  .btn-enhanced,
+  .btn-outline-enhanced,
+  .gradient-wegic,
+  .gradient-wegic-bg {
+    /* These classes are deprecated - use Button component variants instead */
   }
 
-  .btn-enhanced:hover {
-    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
-    transform: translateY(-2px) scale(1.02);
+  /* Enhanced button effects for special cases */
+  .btn-special-glow {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4), 0 8px 25px rgba(0, 0, 0, 0.1);
   }
+
+  .btn-special-glow:hover {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 12px 35px rgba(0, 0, 0, 0.15);
+  }
+
+  /* White outline button for dark backgrounds */
+  .btn-outline-white {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+    color: white !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #1f2937 !important;
+    border-color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  /* Legacy button overrides - cleaned up for new system */
+  /* All button styling is now handled by the Button component variants */
 
   .btn-outline-enhanced {
     background: white;
