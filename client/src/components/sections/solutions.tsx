@@ -5,51 +5,35 @@ export function Solutions() {
   const solutions: Solution[] = [
     {
       id: "sales-forecasting",
-      title: "Sales Forecasting",
-      description: "Predict future sales trends with 95% accuracy using advanced ML algorithms and historical data analysis.",
+      title: "**Never Miss Revenue Opportunities**",
+      description: "SalesAIde predicts your sales with 95% accuracy, automatically identifying the best times to launch campaigns and optimize inventory.",
       icon: "TrendingUp",
       iconColor: "bg-primary",
-      features: ["Real-time predictions", "Seasonal adjustments", "Multi-channel integration"]
+      features: ["Automated predictions", "Seasonal optimization", "Multi-channel insights"]
     },
     {
       id: "customer-segmentation",
-      title: "Customer Segmentation",
-      description: "Identify high-value customers and create targeted marketing campaigns that convert.",
+      title: "**Target High-Value Customers Automatically**",
+      description: "Our AI identifies your most profitable customers and creates personalized campaigns that increase conversion rates by 40%.",
       icon: "Users",
       iconColor: "bg-accent",
-      features: ["Behavioral analysis", "Purchase patterns", "Personalized recommendations"]
+      features: ["Behavioral targeting", "Purchase pattern analysis", "Automated personalization"]
     },
     {
       id: "inventory-optimization",
-      title: "Inventory Optimization",
-      description: "Reduce waste and maximize profits with AI-driven inventory management and demand planning.",
+      title: "**Reduce Waste, Maximize Profits**",
+      description: "Eliminate overstock and stockouts with AI-driven demand planning that adapts to market changes in real-time.",
       icon: "Package",
       iconColor: "bg-success",
-      features: ["Demand forecasting", "Auto-reordering", "Waste reduction"]
+      features: ["Smart demand forecasting", "Automated reordering", "Waste elimination"]
     },
     {
       id: "dynamic-pricing",
-      title: "Dynamic Pricing",
-      description: "Optimize pricing strategies in real-time based on market conditions, demand, and competitor analysis.",
+      title: "**Price Optimization on Autopilot**",
+      description: "Maximize revenue with dynamic pricing that automatically adjusts based on demand, competition, and market conditions.",
       icon: "Tag",
       iconColor: "bg-purple-500",
-      features: ["Competitor monitoring", "Demand-based pricing", "Profit maximization"]
-    },
-    {
-      id: "market-intelligence",
-      title: "Market Intelligence",
-      description: "Stay ahead of trends with comprehensive market analysis and competitive intelligence.",
-      icon: "Search",
-      iconColor: "bg-orange-500",
-      features: ["Trend analysis", "Market insights", "Competitive analysis"]
-    },
-    {
-      id: "customer-retention",
-      title: "Customer Retention",
-      description: "Predict customer churn and implement targeted retention strategies to maximize lifetime value.",
-      icon: "Heart",
-      iconColor: "bg-red-500",
-      features: ["Churn prediction", "Loyalty programs", "Personalized offers"]
+      features: ["Real-time price optimization", "Competitor monitoring", "Profit maximization"]
     }
   ];
 
