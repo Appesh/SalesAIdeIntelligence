@@ -17,7 +17,7 @@ COPY . .
 
 # Build the application
 ENV NODE_ENV=production
-RUN npm run build:prod
+RUN npm run build:railway
 
 # Production image, copy all the files and run the app
 FROM base AS runner
