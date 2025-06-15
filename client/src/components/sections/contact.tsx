@@ -73,10 +73,10 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Ready to Transform Your Sales?
+            Start Your Effortless Growth Journey
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join hundreds of successful retailers who have revolutionized their business with SalesAIde. Start your free trial today.
+            Join 500+ retail businesses already using SalesAIde to turn slow months into growth months. See results in your first week.
           </p>
         </div>
 
@@ -224,7 +224,7 @@ export function Contact() {
                   size="lg"
                   disabled={contactMutation.isPending}
                 >
-                  {contactMutation.isPending ? "Submitting..." : "Start Free Trial"}
+                  {contactMutation.isPending ? "Submitting..." : "Get My Growth Plan"}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
 

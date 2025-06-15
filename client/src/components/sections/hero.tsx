@@ -16,13 +16,13 @@ export function Hero() {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-sm font-medium text-primary mb-6">
               <TrendingUp className="mr-2 h-4 w-4" />
-              <span>Boost Sales by 40% with AI</span>
+              <span>Proven Results: 40% Sales Growth</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Revolutionize Your <span className="text-primary">Retail Sales</span> with AI
+              Turn Slow Months Into <span className="text-primary">Growth Months</span> with AI
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Transform slow months into growth opportunities. Our AI analyzes your existing data and learns from sales patterns to drive consistent revenue growth.
+              SalesAIde analyzes your existing retail data and automatically optimizes your sales strategy. No complex setup. No guesswork. Just consistent growth, even during traditionally slow periods.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -30,7 +30,7 @@ export function Hero() {
                 className="bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-secondary transition-colors"
                 size="lg"
               >
-                Get Started Free
+                Start Growing Today
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button

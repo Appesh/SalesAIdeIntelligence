@@ -4,20 +4,20 @@ export function HowItWorks() {
   const steps: ProcessStep[] = [
     {
       number: 1,
-      title: "Connect Your Data",
-      description: "Seamlessly integrate with your existing POS systems, e-commerce platforms, and databases. Our secure connections ensure your data remains protected.",
+      title: "Connect & Automate",
+      description: "Link your existing systems in minutes. SalesAIde automatically starts analyzing your retail data with zero manual setup required.",
       color: "bg-primary"
     },
     {
       number: 2,
-      title: "AI Analysis",
-      description: "Our advanced ML algorithms analyze your sales patterns, customer behavior, and market trends to identify growth opportunities and optimize strategies.",
+      title: "AI Learns & Optimizes",
+      description: "Our generative AI marketing algorithms identify patterns and opportunities in your sales data, creating personalized growth strategies.",
       color: "bg-accent"
     },
     {
       number: 3,
-      title: "Actionable Insights",
-      description: "Receive personalized recommendations, automated reports, and real-time alerts that help you make data-driven decisions and boost sales.",
+      title: "Growth Happens Automatically",
+      description: "Get data-driven insights and automated seasonal campaigns that boost sales during slow periods. No ongoing management needed.",
       color: "bg-success"
     }
   ];
@@ -27,10 +27,10 @@ export function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            How SalesAIde Works
+            How It Works: 3 Steps to Automated Growth
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our AI-powered platform transforms your retail data into actionable insights in just three simple steps.
+            Start seeing results in days, not months. Our machine learning for sales platform does the heavy lifting while you focus on running your business.
           </p>
         </div>
 
