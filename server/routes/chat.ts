@@ -63,15 +63,16 @@ export function registerChatRoutes(app: Express): void {
       const session = await storage.updateChatSession(sessionId, updates);
       res.json({ success: true, session });
     } catch (error) {
-      if (error.message.includes("not found")) {
-        res.status(404).json({ 
-          success: false, 
-          message: error.message 
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      if (errorMessage.includes("not found")) {
+        res.status(404).json({
+          success: false,
+          message: errorMessage
         });
       } else {
-        res.status(500).json({ 
-          success: false, 
-          message: "Internal server error" 
+        res.status(500).json({
+          success: false,
+          message: "Internal server error"
         });
       }
     }
@@ -168,18 +169,25 @@ export function registerChatRoutes(app: Express): void {
       const leadId = parseInt(req.params.leadId);
       const updates = req.body;
       
+      if (!storage.updateChatLead) {
+        return res.status(501).json({
+          success: false,
+          message: "Update lead functionality not implemented"
+        });
+      }
       const lead = await storage.updateChatLead(leadId, updates);
       res.json({ success: true, lead });
     } catch (error) {
-      if (error.message.includes("not found")) {
-        res.status(404).json({ 
-          success: false, 
-          message: error.message 
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      if (errorMessage.includes("not found")) {
+        res.status(404).json({
+          success: false,
+          message: errorMessage
         });
       } else {
-        res.status(500).json({ 
-          success: false, 
-          message: "Internal server error" 
+        res.status(500).json({
+          success: false,
+          message: "Internal server error"
         });
       }
     }

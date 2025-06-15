@@ -1,69 +1,122 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
+import helmet from "helmet";
+import compression from "compression";
+import rateLimit from "express-rate-limit";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, serveStatic } from "./vite";
+import { appConfig, corsConfig, rateLimitConfig, helmetConfig, isProduction } from "./config";
+import { logger } from "./logger";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-  const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+// Trust proxy if in production
+if (isProduction() && appConfig.TRUST_PROXY) {
+  app.set("trust proxy", 1);
+}
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
+// Security middleware
+app.use(helmet(helmetConfig));
+app.use(cors(corsConfig));
 
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
+// Rate limiting
+const limiter = rateLimit(rateLimitConfig);
+app.use("/api", limiter);
 
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
+// Compression
+app.use(compression());
 
-      log(logLine);
-    }
+// Body parsing
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: false, limit: "10mb" }));
+
+// Request logging
+app.use(logger.requestLogger());
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: appConfig.NODE_ENV,
+    version: process.env.npm_package_version || "unknown",
   });
+});
 
-  next();
+// API status endpoint
+app.get("/api/status", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "SalesAIde API is running",
+    timestamp: new Date().toISOString(),
+  });
 });
 
 (async () => {
-  const server = await registerRoutes(app);
+  try {
+    const server = await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    // Error logging middleware
+    app.use(logger.errorLogger());
 
-    res.status(status).json({ message });
-    throw err;
-  });
+    // Global error handler
+    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+      const status = err.status || err.statusCode || 500;
+      const message = isProduction() ? "Internal Server Error" : err.message;
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
+      logger.error(`Unhandled error: ${err.message}`, "express", {
+        stack: err.stack,
+        url: req.url,
+        method: req.method,
+        ip: req.ip,
+      });
+
+      res.status(status).json({
+        success: false,
+        message,
+        ...(isProduction() ? {} : { stack: err.stack })
+      });
+    });
+
+    // Setup Vite in development or serve static files in production
+    if (appConfig.NODE_ENV === "development") {
+      await setupVite(app, server);
+    } else {
+      serveStatic(app);
+    }
+
+    // Start server
+    const port = appConfig.PORT;
+    const host = isProduction() ? "0.0.0.0" : appConfig.HOST;
+
+    server.listen(port, host, () => {
+      logger.info(`🚀 SalesAIde server running on ${host}:${port}`, "server");
+      logger.info(`📊 Environment: ${appConfig.NODE_ENV}`, "server");
+      logger.info(`🔗 Health check: http://${host}:${port}/health`, "server");
+    });
+
+    // Graceful shutdown
+    const gracefulShutdown = (signal: string) => {
+      logger.info(`📴 Received ${signal}, shutting down gracefully...`, "server");
+
+      server.close(() => {
+        logger.info("✅ Server closed successfully", "server");
+        process.exit(0);
+      });
+
+      // Force close after 10 seconds
+      setTimeout(() => {
+        logger.error("❌ Forced shutdown after timeout", "server");
+        process.exit(1);
+      }, 10000);
+    };
+
+    process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+    process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+
+  } catch (error) {
+    logger.error("❌ Failed to start server", "server", error);
+    process.exit(1);
   }
-
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen({
-    port,
-    host: "localhost",
-  }, () => {
-    log(`serving on port ${port}`);
-  });
 })();

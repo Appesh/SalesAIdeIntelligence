@@ -1,4 +1,5 @@
 import { pgTable, text, serial, timestamp, boolean, integer, jsonb } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -21,6 +22,8 @@ export const insertContactSchema = createInsertSchema(contacts).omit({
 export type InsertContact = z.infer<typeof insertContactSchema>;
 export type Contact = typeof contacts.$inferSelect;
 
+
+
 // Chat Sessions Table
 export const chatSessions = pgTable("chat_sessions", {
   id: text("id").primaryKey(),
@@ -31,7 +34,7 @@ export const chatSessions = pgTable("chat_sessions", {
   businessSize: text("business_size"), // 'small', 'medium', 'enterprise'
   currentTopic: text("current_topic"),
   userIntent: text("user_intent"),
-  painPoints: jsonb("pain_points").$type<string[]>().default([]),
+  painPoints: jsonb("pain_points").$type<string[]>().default(sql`'[]'::jsonb`),
   budget: text("budget"),
   timeline: text("timeline"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -63,7 +66,7 @@ export const chatLeads = pgTable("chat_leads", {
   company: text("company").notNull(),
   phone: text("phone"),
   businessType: text("business_type").notNull(),
-  interests: jsonb("interests").$type<string[]>().default([]),
+  interests: jsonb("interests").$type<string[]>().default(sql`'[]'::jsonb`),
   qualificationStage: text("qualification_stage").notNull(),
   leadScore: integer("lead_score").default(0),
   isConverted: boolean("is_converted").default(false),
@@ -79,8 +82,8 @@ export const chatAnalytics = pgTable("chat_analytics", {
   agentMessageCount: integer("agent_message_count").default(0),
   duration: integer("duration"), // in milliseconds
   leadCaptured: boolean("lead_captured").default(false),
-  conversationFlow: jsonb("conversation_flow").$type<string[]>().default([]),
-  intents: jsonb("intents").$type<string[]>().default([]),
+  conversationFlow: jsonb("conversation_flow").$type<string[]>().default(sql`'[]'::jsonb`),
+  intents: jsonb("intents").$type<string[]>().default(sql`'[]'::jsonb`),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -15,6 +15,9 @@ import {
   type ChatAnalytics,
   type InsertChatAnalytics
 } from "@shared/schema";
+import { isProduction } from "./config";
+import { DatabaseStorage } from "./storage/database";
+import { logger } from "./logger";
 
 export interface IStorage {
   // Contact operations
@@ -34,12 +37,16 @@ export interface IStorage {
   // Chat lead operations
   createChatLead(lead: InsertChatLead): Promise<ChatLead>;
   getChatLeads(): Promise<ChatLead[]>;
-  updateChatLead(leadId: number, updates: Partial<InsertChatLead>): Promise<ChatLead>;
+  getChatLeadsBySession?(sessionId: string): Promise<ChatLead[]>;
+  updateChatLead?(leadId: number, updates: Partial<InsertChatLead>): Promise<ChatLead>;
 
   // Chat analytics operations
   createChatAnalytics(analytics: InsertChatAnalytics): Promise<ChatAnalytics>;
   getChatAnalytics(): Promise<ChatAnalytics[]>;
   getChatAnalyticsBySession(sessionId: string): Promise<ChatAnalytics | null>;
+
+  // Health check (optional for database implementations)
+  healthCheck?(): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
@@ -153,6 +160,12 @@ export class MemStorage implements IStorage {
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
   }
 
+  async getChatLeadsBySession(sessionId: string): Promise<ChatLead[]> {
+    return Array.from(this.chatLeads.values())
+      .filter(lead => lead.sessionId === sessionId)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
   async updateChatLead(leadId: number, updates: Partial<InsertChatLead>): Promise<ChatLead> {
     const existingLead = this.chatLeads.get(leadId);
     if (!existingLead) {
@@ -190,4 +203,15 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Initialize storage based on environment
+function createStorage(): IStorage {
+  if (isProduction()) {
+    logger.info("🗄️ Using database storage for production", "storage");
+    return new DatabaseStorage();
+  } else {
+    logger.info("💾 Using memory storage for development", "storage");
+    return new MemStorage();
+  }
+}
+
+export const storage = createStorage();

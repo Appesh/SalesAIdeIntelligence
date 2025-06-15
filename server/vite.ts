@@ -5,25 +5,15 @@ import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
+import { logger } from "./logger";
 
 const viteLogger = createLogger();
-
-export function log(message: string, source = "express") {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
-    allowedHosts: true,
+    allowedHosts: ["localhost", "127.0.0.1"],
   };
 
   const vite = await createViteServer({
@@ -32,8 +22,17 @@ export async function setupVite(app: Express, server: Server) {
     customLogger: {
       ...viteLogger,
       error: (msg, options) => {
+        logger.error(`Vite error: ${msg}`, "vite", options);
         viteLogger.error(msg, options);
         process.exit(1);
+      },
+      warn: (msg, options) => {
+        logger.warn(`Vite warning: ${msg}`, "vite", options);
+        viteLogger.warn(msg, options);
+      },
+      info: (msg, options) => {
+        logger.info(`Vite: ${msg}`, "vite", options);
+        viteLogger.info(msg, options);
       },
     },
     server: serverOptions,
@@ -61,6 +60,7 @@ export async function setupVite(app: Express, server: Server) {
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
+      logger.error(`Vite SSR error: ${(e as Error).message}`, "vite", { stack: (e as Error).stack });
       vite.ssrFixStacktrace(e as Error);
       next(e);
     }
