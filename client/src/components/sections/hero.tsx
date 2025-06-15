@@ -1,5 +1,6 @@
 import { TrendingUp, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ParallaxImage from "@/components/ui/parallax-image";
 
 export function Hero() {
   const scrollToContact = () => {
@@ -10,7 +11,28 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 py-20 min-h-screen flex items-center">
+    <section id="home" className="relative overflow-hidden py-20 min-h-screen flex items-center">
+      {/* Parallax Background */}
+      <div className="absolute inset-0">
+        <ParallaxImage
+          src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80"
+          alt="Modern business environment background"
+          effect="combined"
+          containerClassName="h-full"
+          className="opacity-10"
+          minScale={1}
+          maxScale={1.05}
+          minOpacity={0.05}
+          maxOpacity={0.15}
+          minTranslateY={0}
+          maxTranslateY={-30}
+          scrollSensitivity={0.3}
+          transitionDuration={0.6}
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/90 via-pink-50/90 to-yellow-50/90"></div>
+      </div>
+
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-20 h-20 bg-wegic-purple rounded-full opacity-20 animate-float"></div>

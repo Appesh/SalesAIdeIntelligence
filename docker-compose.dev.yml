@@ -1,35 +1,82 @@
+# Docker Compose for Local Development
+# Use with: docker-compose -f docker-compose.dev.yml up
+# This provides a standalone development database setup
+
 version: '3.8'
 
 services:
-  # Development Database
+  # Local Development PostgreSQL Database
   postgres-dev:
     image: postgres:16-alpine
+    container_name: salesaide-postgres-dev
     environment:
       - POSTGRES_DB=salesaide_dev
       - POSTGRES_USER=salesaide
       - POSTGRES_PASSWORD=salesaide_dev_password
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=C
     ports:
-      - "5433:5432"
+      - "5433:5432"  # Different port to avoid conflicts
     volumes:
       - postgres_dev_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./docker/postgres/init-extensions.sql:/docker-entrypoint-initdb.d/02-extensions.sql
+      - ./docker/postgres/dev-seed.sql:/docker-entrypoint-initdb.d/03-seed.sql
+      - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U salesaide -d salesaide_dev"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - salesaide-dev-network
+    command: >
+      postgres
+      -c config_file=/etc/postgresql/postgresql.conf
+      -c log_statement=all
+      -c log_min_duration_statement=0
 
-  # Redis for development
+  # pgAdmin for database management
+  pgadmin-dev:
+    image: dpage/pgadmin4:latest
+    container_name: salesaide-pgadmin-dev
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@salesaide.local
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    ports:
+      - "8081:80"  # Different port to avoid conflicts
+    volumes:
+      - pgadmin_dev_data:/var/lib/pgadmin
+      - ./docker/pgadmin/dev-servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      - postgres-dev
+    restart: unless-stopped
+    networks:
+      - salesaide-dev-network
+
+  # Redis for development (optional)
   redis-dev:
     image: redis:7-alpine
+    container_name: salesaide-redis-dev
     ports:
-      - "6380:6379"
+      - "6380:6379"  # Different port to avoid conflicts
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - salesaide-dev-network
 
 volumes:
   postgres_dev_data:
+    driver: local
+  pgadmin_dev_data:
+    driver: local
+
+networks:
+  salesaide-dev-network:
+    driver: bridge

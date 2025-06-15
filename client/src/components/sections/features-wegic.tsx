@@ -1,5 +1,6 @@
 import { Zap, Edit3, Globe, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ParallaxImage from "@/components/ui/parallax-image";
 
 interface FeatureStep {
   icon: React.ReactNode;
@@ -7,6 +8,8 @@ interface FeatureStep {
   description: string;
   bgColor: string;
   image: string;
+  imageUrl: string;
+  imageAlt: string;
 }
 
 const features: FeatureStep[] = [
@@ -15,21 +18,27 @@ const features: FeatureStep[] = [
     title: "Analyze in 10s",
     description: "Just tell us about your business and we'll instantly analyze your sales patterns and opportunities",
     bgColor: "bg-wegic-purple",
-    image: "⚡"
+    image: "⚡",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    imageAlt: "Analytics and data visualization dashboard"
   },
   {
     icon: <Edit3 className="w-8 h-8 text-white" />,
-    title: "Optimize easily", 
+    title: "Optimize easily",
     description: "Our AI creates personalized strategies and campaigns that you can review and adjust with simple chat commands",
     bgColor: "bg-wegic-pink",
-    image: "✨"
+    image: "✨",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80",
+    imageAlt: "Business optimization and strategy planning"
   },
   {
     icon: <Globe className="w-8 h-8 text-white" />,
     title: "Grow in 1 click",
     description: "Deploy your optimized sales strategies across all channels and watch your revenue grow automatically",
-    bgColor: "bg-wegic-green", 
-    image: "🚀"
+    bgColor: "bg-wegic-green",
+    image: "🚀",
+    imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    imageAlt: "Team collaboration and business growth"
   }
 ];
 
@@ -106,12 +115,25 @@ export function FeaturesWegic() {
                   </div>
                 </div>
                 
-                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''} text-center`}>
-                  <div className="text-9xl animate-float mb-8">
-                    {feature.image}
-                  </div>
+                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <ParallaxImage
+                    src={feature.imageUrl}
+                    alt={feature.imageAlt}
+                    effect="combined"
+                    containerClassName="h-80 lg:h-96 rounded-2xl shadow-xl"
+                    minScale={0.95}
+                    maxScale={1.08}
+                    minRotation={-1}
+                    maxRotation={1}
+                    minOpacity={0.9}
+                    maxOpacity={1}
+                    minTranslateY={10}
+                    maxTranslateY={-10}
+                    scrollSensitivity={0.4}
+                    transitionDuration={0.4}
+                  />
                   {index < features.length - 1 && (
-                    <div className="hidden lg:block">
+                    <div className="hidden lg:block mt-8">
                       <ArrowRight className="w-12 h-12 text-gray-300 mx-auto animate-bounce-slow" />
                     </div>
                   )}

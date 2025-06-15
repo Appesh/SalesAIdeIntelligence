@@ -1,11 +1,14 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ParallaxImage from "@/components/ui/parallax-image";
 
 interface WorkExample {
   title: string;
   subtitle: string;
   description: string;
   image: string;
+  imageUrl: string;
+  imageAlt: string;
   bgColor: string;
   textColor: string;
   stats: {
@@ -20,6 +23,8 @@ const works: WorkExample[] = [
     subtitle: "Seasonal Sales Optimization",
     description: "AI-powered seasonal campaigns that increased holiday sales by 65% for a premium fashion retailer",
     image: "🛍️",
+    imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    imageAlt: "Fashion retail store with modern displays",
     bgColor: "bg-gradient-to-br from-wegic-purple to-wegic-pink",
     textColor: "text-white",
     stats: [
@@ -28,10 +33,12 @@ const works: WorkExample[] = [
     ]
   },
   {
-    title: "TECH REVOLUTION", 
+    title: "TECH REVOLUTION",
     subtitle: "Inventory Intelligence Platform",
     description: "Smart inventory management that reduced waste by 40% while boosting electronics sales",
     image: "📱",
+    imageUrl: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2126&q=80",
+    imageAlt: "Modern electronics and technology devices",
     bgColor: "bg-gradient-to-br from-wegic-blue to-wegic-green",
     textColor: "text-white",
     stats: [
@@ -44,6 +51,8 @@ const works: WorkExample[] = [
     subtitle: "Customer Segmentation AI",
     description: "Personalized marketing campaigns that transformed a local garden center into a regional leader",
     image: "🌱",
+    imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    imageAlt: "Beautiful garden center with plants and flowers",
     bgColor: "bg-gradient-to-br from-wegic-green to-wegic-yellow",
     textColor: "text-white",
     stats: [
@@ -109,9 +118,22 @@ export function Works() {
                 </div>
                 
                 <div className="flex justify-center">
-                  <div className="text-9xl animate-float">
-                    {work.image}
-                  </div>
+                  <ParallaxImage
+                    src={work.imageUrl}
+                    alt={work.imageAlt}
+                    effect="combined"
+                    containerClassName="w-80 h-64 rounded-xl shadow-2xl"
+                    minScale={0.9}
+                    maxScale={1.1}
+                    minRotation={-2}
+                    maxRotation={2}
+                    minOpacity={0.8}
+                    maxOpacity={1}
+                    minTranslateY={15}
+                    maxTranslateY={-15}
+                    scrollSensitivity={0.5}
+                    transitionDuration={0.4}
+                  />
                 </div>
               </div>
             </div>

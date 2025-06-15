@@ -1,5 +1,6 @@
 import { Rocket, Shield, Settings, Headphones, Star } from "lucide-react";
 import type { Feature, Stats } from "@/lib/types";
+import ParallaxImage from "@/components/ui/parallax-image";
 
 export function WhyChoose() {
   const features: Feature[] = [
@@ -48,8 +49,29 @@ export function WhyChoose() {
   };
 
   return (
-    <section id="why-choose" className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-choose" className="py-20 relative overflow-hidden">
+      {/* Parallax Background */}
+      <div className="absolute inset-0">
+        <ParallaxImage
+          src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+          alt="Technology and innovation background"
+          effect="combined"
+          containerClassName="h-full"
+          className="opacity-20"
+          minScale={1}
+          maxScale={1.08}
+          minOpacity={0.15}
+          maxOpacity={0.25}
+          minTranslateY={0}
+          maxTranslateY={-40}
+          scrollSensitivity={0.4}
+          transitionDuration={0.5}
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-purple-900/90 to-pink-900/90"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
             Why Choose <span className="gradient-wegic bg-clip-text text-transparent gradient-text-force">SalesAIde</span>?

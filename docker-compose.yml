@@ -23,6 +23,8 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
+    networks:
+      - salesaide-network
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
       interval: 30s
@@ -33,25 +35,53 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
+    container_name: salesaide-postgres
     environment:
       - POSTGRES_DB=salesaide
       - POSTGRES_USER=salesaide
       - POSTGRES_PASSWORD=salesaide_password
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=C
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./docker/postgres/init-extensions.sql:/docker-entrypoint-initdb.d/02-extensions.sql
+      - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U salesaide -d salesaide"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - salesaide-network
+
+  # pgAdmin for database management (development only)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: salesaide-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@salesaide.local
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+      - PGADMIN_CONFIG_SERVER_MODE=False
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - salesaide-network
+    profiles:
+      - dev
 
   # Redis (optional, for session storage in production)
   redis:
     image: redis:7-alpine
+    container_name: salesaide-redis
     ports:
       - "6379:6379"
     restart: unless-stopped
@@ -60,6 +90,17 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - salesaide-network
+    profiles:
+      - redis
 
 volumes:
   postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  salesaide-network:
+    driver: bridge

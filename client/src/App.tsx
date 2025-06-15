@@ -11,6 +11,9 @@ import HowItWorks from "@/pages/how-it-works";
 import WhyChooseUs from "@/pages/why-choose-us";
 import ContactUs from "@/pages/contact-us";
 import ChatTest from "@/pages/chat-test";
+import ChatDemo from "@/pages/chat-demo";
+import ChatSimpleTest from "@/pages/chat-simple-test";
+import ParallaxTest from "@/pages/parallax-test";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,6 +25,9 @@ function Router() {
       <Route path="/why-choose-us" component={WhyChooseUs} />
       <Route path="/contact-us" component={ContactUs} />
       <Route path="/chat-test" component={ChatTest} />
+      <Route path="/chat-demo" component={ChatDemo} />
+      <Route path="/chat-simple-test" component={ChatSimpleTest} />
+      <Route path="/parallax-test" component={ParallaxTest} />
       <Route component={NotFound} />
     </Switch>
   );

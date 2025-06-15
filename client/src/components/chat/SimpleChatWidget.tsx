@@ -12,6 +12,159 @@ interface SimpleChatWidgetProps {
   onClose: () => void;
 }
 
+// Enhanced styles for better UI/UX
+const chatWidgetStyles = {
+  container: (isOpen: boolean) => ({
+    position: 'fixed' as const,
+    bottom: '100px',
+    right: '20px',
+    width: 'min(400px, calc(100vw - 40px))', // Responsive width
+    height: 'min(600px, calc(100vh - 140px))', // Responsive height
+    maxHeight: '80vh',
+    background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '20px',
+    boxShadow: '0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    zIndex: 9998,
+    display: 'flex',
+    flexDirection: 'column' as const,
+    overflow: 'hidden',
+    transform: isOpen ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+    opacity: isOpen ? 1 : 0,
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    pointerEvents: isOpen ? 'auto' : 'none',
+  }),
+  header: {
+    background: 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%)',
+    color: 'white',
+    padding: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: '20px 20px 0 0',
+    position: 'relative' as const,
+    overflow: 'hidden',
+  },
+  headerOverlay: {
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%)',
+    pointerEvents: 'none' as const,
+  },
+  avatar: {
+    width: '44px',
+    height: '44px',
+    background: 'rgba(255, 255, 255, 0.25)',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '20px',
+    border: '2px solid rgba(255, 255, 255, 0.3)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+  },
+  closeButton: {
+    background: 'rgba(255, 255, 255, 0.2)',
+    border: 'none',
+    color: 'white',
+    fontSize: '18px',
+    cursor: 'pointer',
+    padding: '8px',
+    borderRadius: '8px',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '36px',
+    height: '36px',
+  },
+};
+
+// Additional styles for messages and input
+const messageStyles = {
+  container: {
+    flex: 1,
+    padding: '20px',
+    overflowY: 'auto' as const,
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '16px',
+    scrollBehavior: 'smooth' as const,
+  },
+  messageWrapper: (sender: 'user' | 'bot') => ({
+    display: 'flex',
+    justifyContent: sender === 'user' ? 'flex-end' : 'flex-start',
+    animation: 'slideInMessage 0.3s ease-out',
+  }),
+  message: (sender: 'user' | 'bot') => ({
+    maxWidth: '85%',
+    padding: '12px 16px',
+    borderRadius: sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+    background: sender === 'user'
+      ? 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%)'
+      : 'rgba(248, 250, 252, 0.8)',
+    color: sender === 'user' ? 'white' : '#374151',
+    fontSize: '14px',
+    lineHeight: '1.5',
+    boxShadow: sender === 'user'
+      ? '0 4px 12px rgba(139, 92, 246, 0.3)'
+      : '0 2px 8px rgba(0, 0, 0, 0.1)',
+    border: sender === 'bot' ? '1px solid rgba(0, 0, 0, 0.05)' : 'none',
+    backdropFilter: 'blur(10px)',
+    position: 'relative' as const,
+  }),
+  inputContainer: {
+    padding: '20px',
+    borderTop: '1px solid rgba(0, 0, 0, 0.08)',
+    display: 'flex',
+    gap: '12px',
+    background: 'rgba(255, 255, 255, 0.5)',
+    backdropFilter: 'blur(10px)',
+  },
+  input: {
+    flex: 1,
+    padding: '12px 16px',
+    border: '1px solid rgba(0, 0, 0, 0.1)',
+    borderRadius: '12px',
+    fontSize: '14px',
+    outline: 'none',
+    background: 'rgba(255, 255, 255, 0.8)',
+    transition: 'all 0.2s ease',
+    backdropFilter: 'blur(10px)',
+  },
+  sendButton: (hasValue: boolean) => ({
+    background: hasValue
+      ? 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%)'
+      : 'rgba(156, 163, 175, 0.5)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '12px',
+    padding: '12px 20px',
+    cursor: hasValue ? 'pointer' : 'not-allowed',
+    fontSize: '14px',
+    fontWeight: '600',
+    transition: 'all 0.2s ease',
+    boxShadow: hasValue ? '0 4px 12px rgba(139, 92, 246, 0.3)' : 'none',
+    transform: hasValue ? 'scale(1)' : 'scale(0.95)',
+  }),
+  typingIndicator: {
+    padding: '12px 16px',
+    borderRadius: '18px 18px 18px 4px',
+    background: 'rgba(248, 250, 252, 0.8)',
+    color: '#6B7280',
+    fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    border: '1px solid rgba(0, 0, 0, 0.05)',
+    backdropFilter: 'blur(10px)',
+  },
+};
+
 export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -31,6 +184,14 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
     }
   }, [messages]);
 
+  // Enhanced keyboard handling
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
 
@@ -45,7 +206,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate bot response
+    // Simulate bot response with more realistic timing
     setTimeout(() => {
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -55,7 +216,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
       };
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
-    }, 1000);
+    }, 1200 + Math.random() * 800); // Variable response time for realism
   };
 
   const getBotResponse = (userInput: string): string => {
@@ -86,157 +247,204 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
 
   return (
     <>
-      {/* Chat widget */}
-      <div style={{
-        position: 'fixed',
-        bottom: '100px',
-        right: '20px',
-        width: '350px',
-        height: '500px',
-        background: 'white',
-        borderRadius: '16px',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-        border: '1px solid #e5e7eb',
-        zIndex: 1000,
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden'
-      }}>
-        {/* Header */}
-        <div style={{
-          background: 'linear-gradient(45deg, #8B5CF6, #EC4899)',
-          color: 'white',
-          padding: '16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              background: 'rgba(255,255,255,0.2)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '18px'
-            }}>
+      {/* Enhanced Chat widget with improved styling */}
+      <div style={chatWidgetStyles.container(isOpen)}>
+        {/* Enhanced Header */}
+        <div style={chatWidgetStyles.header}>
+          <div style={chatWidgetStyles.headerOverlay} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative', zIndex: 1 }}>
+            <div style={chatWidgetStyles.avatar}>
               🤖
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 'bold' }}>SalesAIde Assistant</h3>
-              <p style={{ margin: 0, fontSize: '12px', opacity: 0.9 }}>Online now</p>
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700', letterSpacing: '-0.025em' }}>
+                SalesAIde Assistant
+              </h3>
+              <p style={{ margin: 0, fontSize: '12px', opacity: 0.9, fontWeight: '500' }}>
+                {isTyping ? 'Typing...' : 'Online now'}
+              </p>
             </div>
           </div>
           <button
             onClick={onClose}
             style={{
-              background: 'none',
-              border: 'none',
-              color: 'white',
-              fontSize: '20px',
-              cursor: 'pointer',
-              padding: '4px',
-              borderRadius: '4px'
+              ...chatWidgetStyles.closeButton,
+              ':hover': {
+                background: 'rgba(255, 255, 255, 0.3)',
+                transform: 'scale(1.05)',
+              }
             }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+            aria-label="Close chat"
           >
             ✕
           </button>
         </div>
 
-        {/* Messages */}
-        <div style={{
-          flex: 1,
-          padding: '16px',
-          overflowY: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px'
-        }}>
+        {/* Enhanced Messages Area */}
+        <div style={messageStyles.container}>
           {messages.map((message) => (
             <div
               key={message.id}
-              style={{
-                display: 'flex',
-                justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start'
-              }}
+              style={messageStyles.messageWrapper(message.sender)}
             >
-              <div style={{
-                maxWidth: '80%',
-                padding: '8px 12px',
-                borderRadius: '12px',
-                background: message.sender === 'user' 
-                  ? 'linear-gradient(45deg, #8B5CF6, #EC4899)'
-                  : '#f3f4f6',
-                color: message.sender === 'user' ? 'white' : '#374151',
-                fontSize: '14px',
-                lineHeight: '1.4'
-              }}>
+              <div style={messageStyles.message(message.sender)}>
                 {message.text}
               </div>
             </div>
           ))}
-          
+
           {isTyping && (
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              <div style={{
-                padding: '8px 12px',
-                borderRadius: '12px',
-                background: '#f3f4f6',
-                color: '#374151',
-                fontSize: '14px'
-              }}>
+            <div style={messageStyles.messageWrapper('bot')}>
+              <div style={messageStyles.typingIndicator}>
                 <span>SalesAIde is typing</span>
-                <span style={{ animation: 'blink 1s infinite' }}>...</span>
+                <div style={{
+                  display: 'flex',
+                  gap: '2px',
+                  alignItems: 'center'
+                }}>
+                  <div style={{
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
+                    background: '#8B5CF6',
+                    animation: 'typingDot 1.4s infinite ease-in-out',
+                    animationDelay: '0s'
+                  }} />
+                  <div style={{
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
+                    background: '#8B5CF6',
+                    animation: 'typingDot 1.4s infinite ease-in-out',
+                    animationDelay: '0.2s'
+                  }} />
+                  <div style={{
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
+                    background: '#8B5CF6',
+                    animation: 'typingDot 1.4s infinite ease-in-out',
+                    animationDelay: '0.4s'
+                  }} />
+                </div>
               </div>
             </div>
           )}
-          
+
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div style={{
-          padding: '16px',
-          borderTop: '1px solid #e5e7eb',
-          display: 'flex',
-          gap: '8px'
-        }}>
+        {/* Enhanced Input Area */}
+        <div style={messageStyles.inputContainer}>
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+            onKeyPress={handleKeyPress}
             placeholder="Type your message..."
             style={{
-              flex: 1,
-              padding: '8px 12px',
-              border: '1px solid #d1d5db',
-              borderRadius: '8px',
-              fontSize: '14px',
-              outline: 'none'
+              ...messageStyles.input,
+              ':focus': {
+                borderColor: '#8B5CF6',
+                boxShadow: '0 0 0 3px rgba(139, 92, 246, 0.1)',
+              }
             }}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#8B5CF6';
+              e.target.style.boxShadow = '0 0 0 3px rgba(139, 92, 246, 0.1)';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)';
+              e.target.style.boxShadow = 'none';
+            }}
+            aria-label="Type your message"
           />
           <button
             onClick={handleSendMessage}
             disabled={!inputValue.trim()}
-            style={{
-              background: inputValue.trim() 
-                ? 'linear-gradient(45deg, #8B5CF6, #EC4899)'
-                : '#d1d5db',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '8px 16px',
-              cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
-              fontSize: '14px'
+            style={messageStyles.sendButton(!!inputValue.trim())}
+            onMouseEnter={(e) => {
+              if (inputValue.trim()) {
+                e.currentTarget.style.transform = 'scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 6px 16px rgba(139, 92, 246, 0.4)';
+              }
             }}
+            onMouseLeave={(e) => {
+              if (inputValue.trim()) {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+              }
+            }}
+            aria-label="Send message"
           >
             Send
           </button>
         </div>
       </div>
+
+      {/* Add custom CSS animations */}
+      <style>{`
+        @keyframes slideInMessage {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes typingDot {
+          0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.4;
+          }
+          30% {
+            transform: translateY(-10px);
+            opacity: 1;
+          }
+        }
+
+        /* Custom scrollbar for messages */
+        div[style*="overflowY: auto"]::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        div[style*="overflowY: auto"]::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.05);
+          border-radius: 3px;
+        }
+
+        div[style*="overflowY: auto"]::-webkit-scrollbar-thumb {
+          background: rgba(139, 92, 246, 0.3);
+          border-radius: 3px;
+        }
+
+        div[style*="overflowY: auto"]::-webkit-scrollbar-thumb:hover {
+          background: rgba(139, 92, 246, 0.5);
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 480px) {
+          div[style*="position: fixed"][style*="bottom: 100px"] {
+            bottom: 80px !important;
+            right: 10px !important;
+            left: 10px !important;
+            width: calc(100vw - 20px) !important;
+            height: calc(100vh - 100px) !important;
+            max-height: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
