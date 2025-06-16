@@ -143,7 +143,7 @@ FROM chat_messages WHERE timestamp > NOW() - INTERVAL '24 hours'
 GROUP BY hour ORDER BY hour;
 ```
 
-## 🛠️ Integration with SalesAIde
+## 🛠️ Integration with Motivio
 
 ### API Endpoints
 - All chat operations have corresponding REST endpoints

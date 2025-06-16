@@ -192,7 +192,7 @@ export class ChatService {
     const greeting = userName ? `Hello ${userName}!` : "Hello there!";
     
     return {
-      content: `${greeting} I'm your SalesAIde AI assistant, and I'm excited to help you discover how our AI-powered solutions can transform your retail business. I've helped hundreds of retailers achieve an average 40% sales increase! 
+      content: `${greeting} I'm your Motivio AI assistant, and I'm excited to help you discover how our AI-powered solutions can transform your retail business. I've helped hundreds of retailers achieve an average 40% sales increase!
 
 To give you the most relevant information, could you tell me a bit about your business?`,
       type: 'options',

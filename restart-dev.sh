@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# SalesAIde Development Server Restart Script
+# Motivio Development Server Restart Script
 # This script safely kills existing services and restarts the development server
 
-echo "🚀 SalesAIde Development Server Restart Script"
+echo "🚀 Motivio Development Server Restart Script"
 echo "=============================================="
 
 # Colors for output

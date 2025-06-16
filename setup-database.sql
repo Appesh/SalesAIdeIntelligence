@@ -1,4 +1,4 @@
--- SalesAIde Database Setup Script
+-- Motivio Database Setup Script
 -- Run this script to create all required tables
 
 -- Create contacts table
@@ -93,9 +93,9 @@ CREATE INDEX IF NOT EXISTS "idx_contacts_email" ON "contacts"("email");
 CREATE INDEX IF NOT EXISTS "idx_chat_sessions_created_at" ON "chat_sessions"("created_at");
 
 -- Insert a test record to verify everything works
-INSERT INTO "contacts" ("name", "email", "company", "phone", "business_type", "message") 
-VALUES ('Test User', 'test@salesaide.com', 'SalesAIde', '+1-555-0123', 'Technology', 'Database setup test')
+INSERT INTO "contacts" ("name", "email", "company", "phone", "business_type", "message")
+VALUES ('Test User', 'test@motivio.com', 'Motivio', '+1-555-0123', 'Technology', 'Database setup test')
 ON CONFLICT DO NOTHING;
 
 -- Display success message
-SELECT 'SalesAIde database setup completed successfully!' as status;
+SELECT 'Motivio database setup completed successfully!' as status;

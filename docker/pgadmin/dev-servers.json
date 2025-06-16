@@ -1,7 +1,7 @@
 {
   "Servers": {
     "1": {
-      "Name": "SalesAIde Development Database",
+      "Name": "Motivio Development Database",
       "Group": "Development",
       "Host": "postgres-dev",
       "Port": 5432,
@@ -9,7 +9,7 @@
       "Username": "salesaide",
       "Password": "salesaide_dev_password",
       "SSLMode": "prefer",
-      "Comment": "Local PostgreSQL development database for SalesAIde with sample data"
+      "Comment": "Local PostgreSQL development database for Motivio with sample data"
     }
   }
 }

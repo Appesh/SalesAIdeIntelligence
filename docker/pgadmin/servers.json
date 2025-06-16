@@ -1,7 +1,7 @@
 {
   "Servers": {
     "1": {
-      "Name": "SalesAIde Local Database",
+      "Name": "Motivio Local Database",
       "Group": "Development",
       "Host": "postgres",
       "Port": 5432,
@@ -9,7 +9,7 @@
       "Username": "salesaide",
       "Password": "salesaide_password",
       "SSLMode": "prefer",
-      "Comment": "Local PostgreSQL database for SalesAIde development"
+      "Comment": "Local PostgreSQL database for Motivio development"
     }
   }
 }

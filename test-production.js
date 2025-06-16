@@ -26,7 +26,7 @@ const TEST_ENV = {
   LOG_LEVEL: 'info'
 };
 
-console.log('🧪 SalesAIde Production Test Suite');
+console.log('🧪 Motivio Production Test Suite');
 console.log('=====================================\n');
 
 // Check if build exists

@@ -10,7 +10,7 @@ export function Overview() {
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl text-gray-200 mb-6 leading-relaxed">
-              SalesAIde revolutionizes retail sales by leveraging Generative AI and advanced Machine Learning algorithms to drive growth, even in traditionally slow months. Our platform analyzes your existing data and learns from sales patterns to deliver automated retail solutions that work.
+              Motivio revolutionizes retail sales by leveraging Generative AI and advanced Machine Learning algorithms to drive growth, even in traditionally slow months. Our platform analyzes your existing data and learns from sales patterns to deliver automated retail solutions that work.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
               Stop struggling with seasonal dips. Start experiencing effortless growth with data-driven insights that transform your retail strategy automatically.

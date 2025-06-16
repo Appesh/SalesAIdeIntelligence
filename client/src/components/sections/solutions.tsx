@@ -6,7 +6,7 @@ export function Solutions() {
     {
       id: "sales-forecasting",
       title: "**Never Miss Revenue Opportunities**",
-      description: "SalesAIde predicts your sales with 95% accuracy, automatically identifying the best times to launch campaigns and optimize inventory.",
+      description: "Motivio predicts your sales with 95% accuracy, automatically identifying the best times to launch campaigns and optimize inventory.",
       icon: "TrendingUp",
       iconColor: "bg-primary",
       features: ["Automated predictions", "Seasonal optimization", "Multi-channel insights"]

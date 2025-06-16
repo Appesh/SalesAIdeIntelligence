@@ -48,7 +48,7 @@ app.get("/health", (req, res) => {
 app.get("/api/status", (req, res) => {
   res.json({
     status: "ok",
-    message: "SalesAIde API is running",
+    message: "Motivio API is running",
     timestamp: new Date().toISOString(),
   });
 });
@@ -91,7 +91,7 @@ app.get("/api/status", (req, res) => {
     const host = isProduction() ? "0.0.0.0" : appConfig.HOST;
 
     server.listen(port, host, () => {
-      logger.info(`🚀 SalesAIde server running on ${host}:${port}`, "server");
+      logger.info(`🚀 Motivio server running on ${host}:${port}`, "server");
       logger.info(`📊 Environment: ${appConfig.NODE_ENV}`, "server");
       logger.info(`🔗 Health check: http://${host}:${port}/health`, "server");
     });

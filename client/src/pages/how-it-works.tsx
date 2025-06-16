@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 
 export default function HowItWorks() {
   useEffect(() => {
-    document.title = "How SalesAIde Works - AI Integration Process | 3 Steps to Retail Growth";
+    document.title = "How Motivio Works - AI Integration Process | 3 Steps to Retail Growth";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Learn how SalesAIde\'s 3-step AI process transforms retail data into automated growth. Data analysis, content generation, and continuous optimization for 40% sales increases.');
+      metaDescription.setAttribute('content', 'Learn how Motivio\'s 3-step AI process transforms retail data into automated growth. Data analysis, content generation, and continuous optimization for 40% sales increases.');
     }
   }, []);
   const navigateToContact = () => {
@@ -92,7 +92,7 @@ export default function HowItWorks() {
                   </div>
 
                   <div className="bg-blue-50 rounded-lg p-4">
-                    <h5 className="font-semibold text-primary mb-2">SalesAIde's Analytical Process:</h5>
+                    <h5 className="font-semibold text-primary mb-2">Motivio's Analytical Process:</h5>
                     <p className="text-gray-700">
                       Our proprietary AI engine processes over 200 data points per customer interaction, identifying micro-trends and macro-patterns that traditional analytics miss. The result: actionable insights presented in clear, executive-ready dashboards that guide immediate strategic decisions.
                     </p>
@@ -234,7 +234,7 @@ export default function HowItWorks() {
                   <div className="bg-green-50 rounded-lg p-4">
                     <h5 className="font-semibold text-success mb-2">Efficiency Breakthrough:</h5>
                     <p className="text-gray-700">
-                      <strong>Accelerate content creation from weeks to minutes with SalesAIde.</strong> Our AI generates personalized email campaigns, product descriptions, social media posts, and ad copy variations at unprecedented speed while maintaining quality and brand consistency.
+                      <strong>Accelerate content creation from weeks to minutes with Motivio.</strong> Our AI generates personalized email campaigns, product descriptions, social media posts, and ad copy variations at unprecedented speed while maintaining quality and brand consistency.
                     </p>
                   </div>
                 </div>
@@ -339,7 +339,7 @@ export default function HowItWorks() {
             {/* Results Section */}
             <div className="bg-gray-50 rounded-2xl p-12 text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                The SalesAIde Advantage
+                The Motivio Advantage
               </h2>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
                 Our three-step process delivers measurable results from day one, with continuous improvement that keeps your business ahead of the competition.

@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 
 export default function Solutions() {
   useEffect(() => {
-    document.title = "AI Solutions for Retail Growth - SalesAIde | Sales Forecasting & Automation";
+    document.title = "AI Solutions for Retail Growth - Motivio | Sales Forecasting & Automation";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Discover SalesAIde\'s comprehensive AI-powered retail solutions: intelligent sales boosting, smart seasonal campaigns, and automated content creation. Increase revenue by 40% with our proven retail AI platform.');
+      metaDescription.setAttribute('content', 'Discover Motivio\'s comprehensive AI-powered retail solutions: intelligent sales boosting, smart seasonal campaigns, and automated content creation. Increase revenue by 40% with our proven retail AI platform.');
     }
   }, []);
   const navigateToContact = () => {

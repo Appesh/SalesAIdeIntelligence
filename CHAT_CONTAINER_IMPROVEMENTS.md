@@ -1,4 +1,4 @@
-# Chat Container UI Improvements - SalesAIde
+# Chat Container UI Improvements - Motivio
 
 ## Overview
 Enhanced the relative chat-container UI with modern design patterns, improved responsiveness, and better user experience following the wegic.ai aesthetic.

@@ -24,7 +24,7 @@
 
 #### 🤖 AI Agent Logic
 - **Rule-based Response System**: Intelligent responses based on user input
-- **Service Explanations**: Detailed information about SalesAIde services
+- **Service Explanations**: Detailed information about Motivio services
 - **Interactive Options**: Quick-reply buttons for common queries
 - **Lead Qualification**: Natural conversation flow to collect user information
 
@@ -32,7 +32,7 @@
 - **Wegic.ai-inspired Design**: Matches the existing brand aesthetic
 - **Smooth Animations**: Slide-up, bounce-in, and pulse effects
 - **Responsive Layout**: Works on desktop and mobile
-- **Brand Colors**: Uses existing SalesAIde color scheme
+- **Brand Colors**: Uses existing Motivio color scheme
 - **Professional Styling**: Clean, modern interface
 
 ### How to Use

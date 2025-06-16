@@ -5,7 +5,7 @@ export function HowItWorks() {
     {
       number: 1,
       title: "Connect & Automate",
-      description: "Link your existing systems in minutes. SalesAIde automatically starts analyzing your retail data with zero manual setup required.",
+      description: "Link your existing systems in minutes. Motivio automatically starts analyzing your retail data with zero manual setup required.",
       color: "bg-primary"
     },
     {
