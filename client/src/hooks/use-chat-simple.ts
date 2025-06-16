@@ -22,7 +22,7 @@ export function useChatSimple() {
       if (!prev.session) {
         const welcomeMessage: ChatMessage = {
           id: generateId(),
-          content: "👋 Hi! I'm your SalesAIde assistant. How can I help you today?",
+          content: "👋 Hi! I'm your Motivio assistant. How can I help you today?",
           sender: 'agent',
           timestamp: new Date(),
           type: 'text'
@@ -127,7 +127,7 @@ function getSimpleResponse(userMessage: string): string {
   const msg = userMessage.toLowerCase();
   
   if (msg.includes('hello') || msg.includes('hi')) {
-    return "Hello! Great to meet you! I'm here to help you understand how SalesAIde can transform your retail business. What would you like to know?";
+    return "Hello! Great to meet you! I'm here to help you understand how Motivio can transform your retail business. What would you like to know?";
   }
   
   if (msg.includes('sales') || msg.includes('boost')) {
@@ -139,8 +139,8 @@ function getSimpleResponse(userMessage: string): string {
   }
   
   if (msg.includes('demo')) {
-    return "Absolutely! I'd love to show you SalesAIde in action. Our personalized demos take just 30 minutes and show real results with your business type. Shall we schedule one?";
+    return "Absolutely! I'd love to show you Motivio in action. Our personalized demos take just 30 minutes and show real results with your business type. Shall we schedule one?";
   }
   
-  return "That's a great question! SalesAIde helps retail businesses boost sales, optimize inventory, and understand customers better. What specific area interests you most?";
+  return "That's a great question! Motivio helps retail businesses boost sales, optimize inventory, and understand customers better. What specific area interests you most?";
 }

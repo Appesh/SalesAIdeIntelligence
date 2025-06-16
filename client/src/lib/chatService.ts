@@ -426,7 +426,7 @@ What's your primary focus for AI implementation?`,
     updates.contextUpdate.qualificationStage = 'solution-matching';
     
     const painPoints = context.sessionContext?.painPoints || [];
-    let response = "I understand the challenges you're facing. These are exactly the problems SalesAIde was designed to solve! ";
+    let response = "I understand the challenges you're facing. These are exactly the problems Motivio was designed to solve! ";
     
     if (painPoints.includes('declining_sales')) {
       response += "For declining sales, our AI identifies exactly why sales are dropping and creates targeted strategies to reverse the trend. ";

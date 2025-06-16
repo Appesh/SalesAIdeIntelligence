@@ -63,7 +63,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
             <span className="text-lg">🤖</span>
           </div>
           <div>
-            <h3 className="font-semibold">SalesAIde Assistant</h3>
+            <h3 className="font-semibold">Motivio Assistant</h3>
             <p className="text-xs opacity-90">
               {chatState.session?.context?.qualificationStage === 'demo-scheduling'
                 ? 'Ready to schedule your demo'

@@ -1,7 +1,7 @@
 # Chatbox Fix Summary
 
 ## Problem Identified
-The chatbox was not showing up and messages were not displaying properly in the SalesAIde application.
+The chatbox was not showing up and messages were not displaying properly in the Motivio application.
 
 ## Root Cause Analysis
 After extensive debugging, the issue was identified as:
@@ -30,7 +30,7 @@ Created a simplified, self-contained chat system with minimal dependencies:
    - Responsive design with pure CSS
 
 ### Key Features:
-- ✅ **Floating chat button** with gradient design matching SalesAIde branding
+- ✅ **Floating chat button** with gradient design matching Motivio branding
 - ✅ **Hover effects** and tooltip on chat button
 - ✅ **Chat widget** that opens/closes smoothly
 - ✅ **Message display** for both user and bot messages

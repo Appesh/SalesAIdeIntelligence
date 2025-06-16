@@ -169,7 +169,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "👋 Hi! I'm your SalesAIde assistant. How can I help you today?",
+      text: "👋 Hi! I'm your Motivio assistant. How can I help you today?",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -223,7 +223,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
     const input = userInput.toLowerCase();
     
     if (input.includes('hello') || input.includes('hi')) {
-      return "Hello! Great to meet you! I'm here to help you understand how SalesAIde can transform your retail business. What would you like to know?";
+      return "Hello! Great to meet you! I'm here to help you understand how Motivio can transform your retail business. What would you like to know?";
     }
     
     if (input.includes('sales') || input.includes('boost')) {
@@ -235,10 +235,10 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
     }
     
     if (input.includes('demo')) {
-      return "Absolutely! I'd love to show you SalesAIde in action. Our personalized demos take just 30 minutes and show real results with your business type. Shall we schedule one?";
+      return "Absolutely! I'd love to show you Motivio in action. Our personalized demos take just 30 minutes and show real results with your business type. Shall we schedule one?";
     }
     
-    return "That's a great question! SalesAIde helps retail businesses boost sales, optimize inventory, and understand customers better. What specific area interests you most?";
+    return "That's a great question! Motivio helps retail businesses boost sales, optimize inventory, and understand customers better. What specific area interests you most?";
   };
 
   if (!isOpen) {
@@ -258,7 +258,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
             </div>
             <div>
               <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700', letterSpacing: '-0.025em' }}>
-                SalesAIde Assistant
+                Motivio Assistant
               </h3>
               <p style={{ margin: 0, fontSize: '12px', opacity: 0.9, fontWeight: '500' }}>
                 {isTyping ? 'Typing...' : 'Online now'}

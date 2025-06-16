@@ -59,8 +59,8 @@ export function SimpleChatButton({ onClick }: SimpleChatButtonProps) {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           style={buttonStyles.button(isHovered)}
-          title="Chat with SalesAIde Assistant"
-          aria-label="Open chat with SalesAIde Assistant"
+          title="Chat with Motivio Assistant"
+          aria-label="Open chat with Motivio Assistant"
         >
           💬
         </button>
