@@ -25,7 +25,7 @@ export default function Solutions() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                SalesAIde's AI-Powered <span className="text-primary">Retail Solutions</span>
+                Motivio's AI-Powered <span className="text-primary">Retail Solutions</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
                 Transform your retail business with comprehensive AI solutions that automate growth, optimize performance, and maximize profits. Our intelligent platform delivers measurable results across every aspect of your retail operations.
@@ -49,7 +49,7 @@ export default function Solutions() {
                     Intelligent Sales Boosting
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    SalesAIde's AI continuously analyzes your sales data to uncover hidden revenue opportunities and generate targeted, data-driven strategies that deliver maximum returns with minimal effort.
+                    Motivio's AI continuously analyzes your sales data to uncover hidden revenue opportunities and generate targeted, data-driven strategies that deliver maximum returns with minimal effort.
                   </p>
                   <ul className="space-y-4">
                     <li className="flex items-start">
@@ -150,7 +150,7 @@ export default function Solutions() {
                     Smart Seasonal Campaigns
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    Never miss a sales opportunity again. SalesAIde's AI predicts seasonal shifts and market trends with precision, automatically timing your campaigns and product releases for maximum impact.
+                    Never miss a sales opportunity again. Motivio's AI predicts seasonal shifts and market trends with precision, automatically timing your campaigns and product releases for maximum impact.
                   </p>
                   <ul className="space-y-4">
                     <li className="flex items-start">

@@ -25,10 +25,10 @@ export default function HowItWorks() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                The SalesAIde Process: <span className="text-primary">Seamless AI Integration</span> for Retail
+                The Motivio Process: <span className="text-primary">Seamless AI Integration</span> for Retail
               </h1>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                Discover the simplicity and effectiveness of the SalesAIde process. Our three-step approach transforms your retail data into automated growth strategies that deliver measurable results from day one.
+                Discover the simplicity and effectiveness of the Motivio process. Our three-step approach transforms your retail data into automated growth strategies that deliver measurable results from day one.
               </p>
             </div>
           </div>

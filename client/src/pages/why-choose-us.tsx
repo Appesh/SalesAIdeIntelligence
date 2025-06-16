@@ -26,10 +26,10 @@ export default function WhyChooseUs() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                Your Partner in Retail Growth: <span className="text-primary">The SalesAIde Advantage</span>
+                Your Partner in Retail Growth: <span className="text-primary">The Motivio Advantage</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                SalesAIde stands out as the premier AI-powered retail growth platform, combining cutting-edge technology with deep industry expertise. We deliver measurable results through proven methodologies, personalized solutions, and unwavering commitment to your success.
+                Motivio stands out as the premier AI-powered retail growth platform, combining cutting-edge technology with deep industry expertise. We deliver measurable results through proven methodologies, personalized solutions, and unwavering commitment to your success.
               </p>
             </div>
           </div>

@@ -58,7 +58,7 @@ export function Hero() {
             </h1>
 
             <p className="text-2xl text-gray-700 mb-10 leading-relaxed font-medium">
-              👋 Hey! We're <span className="text-wegic-purple font-bold">SalesAIde</span>.
+              👋 Hey! We're <span className="text-wegic-purple font-bold">Motivio</span>.
               Chat with us, share your retail vision, and we'll boost your sales in 1 minute.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 mb-12">

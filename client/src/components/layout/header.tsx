@@ -39,7 +39,7 @@ export function Header() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <h1 className="text-3xl font-black text-gray-900">
-                Sales<span className="gradient-wegic-text">AI</span><span className="text-wegic-purple">de</span>
+                Moti<span className="gradient-wegic-text">vi</span><span className="text-wegic-purple">o</span>
               </h1>
             </div>
           </div>

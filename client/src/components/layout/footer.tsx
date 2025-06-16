@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">
-              SalesAI<span className="text-primary">de</span>
+              Moti<span className="text-primary">vio</span>
             </h3>
             <p className="text-gray-300 mb-6 max-w-md">
               Revolutionizing retail sales with AI-powered insights and machine learning algorithms that drive consistent growth.
@@ -65,7 +65,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 SalesAIde. All rights reserved.
+            © 2024 Motivio. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
