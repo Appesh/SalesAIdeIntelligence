@@ -31,7 +31,7 @@ export const isTest = () => appConfig.NODE_ENV === "test";
 // Database configuration
 export const dbConfig = {
   url: appConfig.DATABASE_URL,
-  ssl: isProduction() ? { rejectUnauthorized: false } : false,
+  ssl: { rejectUnauthorized: false }, // Always use SSL for AWS RDS
 };
 
 // CORS configuration

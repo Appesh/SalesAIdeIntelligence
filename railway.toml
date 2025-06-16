@@ -10,3 +10,5 @@ restartPolicyType = "on_failure"
 
 [env]
 NODE_ENV = "production"
+DATABASE_URL = "postgresql://motivio:YourStrongPassword123@motivio-db.ckny40iak4nd.us-east-1.rds.amazonaws.com:5432/postgres"
+SESSION_SECRET = "your-super-secret-32-character-key-here-12345-change-this"
