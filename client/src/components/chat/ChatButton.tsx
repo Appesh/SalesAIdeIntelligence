@@ -13,7 +13,7 @@ export function ChatButton({ isOpen, unreadCount, onClick }: ChatButtonProps) {
   console.log('ChatButton rendered, isOpen:', isOpen, 'unreadCount:', unreadCount);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50">
       {/* Debug indicator */}
       <div style={{
         position: 'absolute',
@@ -31,19 +31,22 @@ export function ChatButton({ isOpen, unreadCount, onClick }: ChatButtonProps) {
         onClick={onClick}
         style={{
           position: 'relative',
-          height: '56px',
-          width: '56px',
+          height: '52px',
+          width: '52px',
           borderRadius: '50%',
           background: isOpen ? '#4B5563' : 'linear-gradient(to right, #8B5CF6, #EC4899)',
           border: 'none',
           cursor: 'pointer',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+          boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          fontSize: '24px'
+          fontSize: '20px',
+          minHeight: '44px',
+          minWidth: '44px'
         }}
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         {isOpen ? '✕' : '💬'}
 
@@ -70,17 +73,18 @@ export function ChatButton({ isOpen, unreadCount, onClick }: ChatButtonProps) {
       {!isOpen && (
         <div style={{
           position: 'absolute',
-          bottom: '70px',
+          bottom: '60px',
           right: '0',
           background: 'white',
           borderRadius: '8px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          padding: '12px',
-          maxWidth: '200px',
-          fontSize: '14px',
-          color: '#374151'
+          padding: '8px 12px',
+          maxWidth: '180px',
+          fontSize: '13px',
+          color: '#374151',
+          whiteSpace: 'nowrap'
         }}>
-          💬 Need help? Chat with our AI assistant!
+          💬 Need help? Chat with us!
         </div>
       )}
     </div>

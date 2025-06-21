@@ -17,6 +17,7 @@ import ParallaxTest from "@/pages/parallax-test";
 import { AITestPage } from "@/pages/AITestPage";
 import { QuickAITest } from "@/pages/QuickAITest";
 import ChatTestWithLogs from "@/pages/ChatTestWithLogs";
+import ProductionTest from "@/pages/ProductionTest";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/ai-test" component={AITestPage} />
       <Route path="/quick-ai-test" component={QuickAITest} />
       <Route path="/chat-test-logs" component={ChatTestWithLogs} />
+      <Route path="/production-test" component={ProductionTest} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -53,36 +53,36 @@ export function FeaturesWegic() {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-black text-gray-900 mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
             Features
           </h2>
-          <h3 className="text-3xl font-bold text-gray-700 mb-8">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-700 mb-8">
             Anything you want, just tell your AI team
           </h3>
         </div>
 
         {/* Feature steps */}
-        <div className="space-y-16">
+        <div className="space-y-12 sm:space-y-16">
           {features.map((feature, index) => (
             <div key={index} className="relative">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                 <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl card-hover border border-gray-100">
-                    <div className="text-center mb-6">
-                      <div className={`w-18 h-18 ${feature.bgColor} rounded-2xl flex items-center justify-center mx-auto mb-4 icon-btn-enhanced animate-float`}>
+                  <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-6 sm:p-8 shadow-2xl card-hover border border-gray-100">
+                    <div className="text-center mb-4 sm:mb-6">
+                      <div className={`w-16 h-16 sm:w-18 sm:h-18 ${feature.bgColor} rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 icon-btn-enhanced animate-float`}>
                         {feature.icon}
                       </div>
-                      <h4 className="text-2xl font-black text-gray-900 mb-3">
+                      <h4 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 sm:mb-3">
                         {feature.title}
                       </h4>
-                      <p className="text-gray-600 text-lg leading-relaxed">
+                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
-                    
+
                     {/* Mock interface */}
-                    <div className="bg-gray-50 rounded-2xl p-6">
+                    <div className="bg-gray-50 rounded-2xl p-4 sm:p-6">
                       <div className="flex items-center space-x-3 mb-4">
                         <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                         <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
@@ -115,12 +115,12 @@ export function FeaturesWegic() {
                   </div>
                 </div>
                 
-                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''} mt-6 lg:mt-0`}>
                   <ParallaxImage
                     src={feature.imageUrl}
                     alt={feature.imageAlt}
                     effect="combined"
-                    containerClassName="h-80 lg:h-96 rounded-2xl shadow-xl"
+                    containerClassName="h-64 sm:h-80 lg:h-96 rounded-2xl shadow-xl"
                     minScale={0.95}
                     maxScale={1.08}
                     minRotation={-1}
@@ -133,8 +133,8 @@ export function FeaturesWegic() {
                     transitionDuration={0.4}
                   />
                   {index < features.length - 1 && (
-                    <div className="hidden lg:block mt-8">
-                      <ArrowRight className="w-12 h-12 text-gray-300 mx-auto animate-bounce-slow" />
+                    <div className="hidden lg:block mt-6 sm:mt-8">
+                      <ArrowRight className="w-10 h-10 sm:w-12 sm:h-12 text-gray-300 mx-auto animate-bounce-slow" />
                     </div>
                   )}
                 </div>
@@ -144,19 +144,19 @@ export function FeaturesWegic() {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-20">
-          <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-gray-100">
-            <h3 className="text-4xl font-black text-gray-900 mb-4">
+        <div className="text-center mt-16 sm:mt-20">
+          <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl border border-gray-100">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-4">
               "Let your AI team run your sales growth"
             </h3>
-            <div className="space-y-4 mb-8">
-              <p className="text-xl text-gray-700">✅ Auto-updating your strategies</p>
-              <p className="text-xl text-gray-700">✅ Providing 24/7 optimization</p>
-              <p className="text-xl text-gray-700">✅ Supporting your growth goals</p>
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-700">✅ Auto-updating your strategies</p>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-700">✅ Providing 24/7 optimization</p>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-700">✅ Supporting your growth goals</p>
             </div>
-            <Button size="xl" className="btn-special-glow">
-              Get your AI sales team now
-              <ArrowRight className="ml-3 h-6 w-6" />
+            <Button size="lg" className="btn-special-glow w-full sm:w-auto sm:size-xl">
+              <span className="text-sm sm:text-base lg:text-lg">Get your AI sales team now</span>
+              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
           </div>
         </div>

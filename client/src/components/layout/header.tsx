@@ -35,23 +35,25 @@ export function Header() {
   return (
     <header className="bg-white/80 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 sm:h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <h1 className="text-3xl font-black text-gray-900">
+              <h1 className="text-2xl sm:text-3xl font-black text-gray-900">
                 Moti<span className="gradient-wegic-text">vi</span><span className="text-wegic-purple">o</span>
               </h1>
             </div>
           </div>
 
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-2 sm:space-x-8">
             <Navigation currentSection={currentSection} />
             <Button
               onClick={scrollToContact}
-              size="default"
+              size="sm"
+              className="hidden sm:inline-flex sm:size-default"
             >
               <Sparkles className="mr-2 h-4 w-4" />
-              Build Your Growth
+              <span className="hidden md:inline">Build Your Growth</span>
+              <span className="md:hidden">Get Started</span>
             </Button>
           </div>
         </div>

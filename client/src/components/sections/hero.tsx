@@ -42,66 +42,67 @@ export function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center px-6 py-3 gradient-wegic-bg rounded-full text-sm font-bold text-white mb-8 animate-bounce-slow">
-              <Sparkles className="mr-2 h-5 w-5" />
+            <div className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 gradient-wegic-bg rounded-full text-xs sm:text-sm font-bold text-white mb-6 sm:mb-8 animate-bounce-slow">
+              <Sparkles className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               <span>🚀 Proven Results: 40% Sales Growth</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 leading-tight text-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-900 mb-6 sm:mb-8 leading-tight text-shadow-lg">
               Magic Your
               <br />
               <span className="gradient-wegic-text">Sales Growth</span>
               <br />
-              <span className="text-4xl md:text-5xl font-bold">Chat by Chat</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Chat by Chat</span>
             </h1>
 
-            <p className="text-2xl text-gray-700 mb-10 leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 mb-8 sm:mb-10 leading-relaxed font-medium">
               👋 Hey! We're <span className="text-wegic-purple font-bold">Motivio</span>.
               Chat with us, share your retail vision, and we'll boost your sales in 1 minute.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12">
               <Button
                 onClick={scrollToContact}
                 size="lg"
-                className="btn-special-glow"
+                className="btn-special-glow w-full sm:w-auto"
               >
-                <Zap className="mr-3 h-6 w-6" />
-                Start Growing Via Chat
+                <Zap className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                <span className="text-sm sm:text-base">Start Growing Via Chat</span>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
+                className="w-full sm:w-auto"
               >
-                <Play className="mr-3 h-6 w-6" />
-                Watch Magic Happen
+                <Play className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                <span className="text-sm sm:text-base">Watch Magic Happen</span>
               </Button>
             </div>
 
             {/* Wegic-style example cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-wegic-purple/20 card-hover">
-                <div className="text-sm text-gray-600 mb-1">💼 Fashion retailer needs seasonal boost</div>
-                <div className="font-semibold text-gray-900">Increase holiday sales by 40%</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-12">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-wegic-purple/20 card-hover">
+                <div className="text-xs sm:text-sm text-gray-600 mb-1">💼 Fashion retailer needs seasonal boost</div>
+                <div className="font-semibold text-gray-900 text-sm sm:text-base">Increase holiday sales by 40%</div>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-wegic-pink/20 card-hover">
-                <div className="text-sm text-gray-600 mb-1">🏪 Electronics store wants automation</div>
-                <div className="font-semibold text-gray-900">Automate inventory optimization</div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-wegic-pink/20 card-hover">
+                <div className="text-xs sm:text-sm text-gray-600 mb-1">🏪 Electronics store wants automation</div>
+                <div className="font-semibold text-gray-900 text-sm sm:text-base">Automate inventory optimization</div>
               </div>
             </div>
 
-            <div className="grid grid-cols-4 gap-6 text-center">
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 card-hover">
-                <div className="text-3xl font-black text-wegic-purple mb-1">50+</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 text-center">
+              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 card-hover">
+                <div className="text-2xl sm:text-3xl font-black text-wegic-purple mb-1">50+</div>
                 <div className="text-xs text-gray-600 font-medium">Countries</div>
               </div>
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 card-hover">
-                <div className="text-3xl font-black text-wegic-pink mb-1">25K+</div>
+              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 card-hover">
+                <div className="text-2xl sm:text-3xl font-black text-wegic-pink mb-1">25K+</div>
                 <div className="text-xs text-gray-600 font-medium">Sales Boosted</div>
               </div>
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 card-hover">
-                <div className="text-3xl font-black text-wegic-green mb-1">80%</div>
+              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 card-hover">
+                <div className="text-2xl sm:text-3xl font-black text-wegic-green mb-1">80%</div>
                 <div className="text-xs text-gray-600 font-medium">From Zero</div>
               </div>
               <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 card-hover">
@@ -112,10 +113,10 @@ export function Hero() {
           </div>
 
           {/* Enhanced Wegic-style interactive visual */}
-          <div className="lg:order-last relative flex justify-center lg:justify-end">
-            <div className="relative chat-container group">
+          <div className="lg:order-last relative flex justify-center lg:justify-end mt-8 lg:mt-0">
+            <div className="relative chat-container group w-full max-w-sm sm:max-w-md lg:max-w-lg">
               {/* Main chat interface mockup with enhanced styling */}
-              <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 lg:p-8 transform hover:scale-105 transition-all duration-500 border border-wegic-purple/20 hover:border-wegic-purple/40 hover:shadow-3xl">
+              <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 transform hover:scale-105 transition-all duration-500 border border-wegic-purple/20 hover:border-wegic-purple/40 hover:shadow-3xl">
                 {/* Chat messages container */}
                 <div className="space-y-4 mb-6">
                   {/* AI Welcome Message */}

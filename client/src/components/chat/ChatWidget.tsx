@@ -42,7 +42,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
   console.log('ChatWidget rendering...');
 
   return (
-    <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 flex flex-col overflow-hidden chat-slide-up">
+    <div className="fixed bottom-20 sm:bottom-24 right-2 sm:right-6 w-[calc(100vw-1rem)] sm:w-96 max-w-sm sm:max-w-none h-[70vh] sm:h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 flex flex-col overflow-hidden chat-slide-up">
       {/* Debug indicator */}
       <div style={{
         position: 'absolute',
@@ -57,14 +57,14 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
         CHAT WIDGET
       </div>
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary to-accent text-white p-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-            <span className="text-lg">🤖</span>
+      <div className="bg-gradient-to-r from-primary to-accent text-white p-3 sm:p-4 flex items-center justify-between">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <span className="text-sm sm:text-lg">🤖</span>
           </div>
-          <div>
-            <h3 className="font-semibold">Motivio Assistant</h3>
-            <p className="text-xs opacity-90">
+          <div className="min-w-0 flex-1">
+            <h3 className="font-semibold text-sm sm:text-base truncate">Motivio Assistant</h3>
+            <p className="text-xs opacity-90 truncate">
               {chatState.session?.context?.qualificationStage === 'demo-scheduling'
                 ? 'Ready to schedule your demo'
                 : chatState.session?.context?.qualificationStage === 'lead-capture'
@@ -76,12 +76,13 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
             </p>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1 sm:gap-2 flex-shrink-0">
           <Button
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="text-white hover:bg-white/20 h-8 w-8 p-0"
+            className="text-white hover:bg-white/20 h-8 w-8 p-0 hidden sm:flex"
+            aria-label="Minimize chat"
           >
             <Minimize2 className="h-4 w-4" />
           </Button>
@@ -90,6 +91,7 @@ export function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
             size="sm"
             onClick={onClose}
             className="text-white hover:bg-white/20 h-8 w-8 p-0"
+            aria-label="Close chat"
           >
             <X className="h-4 w-4" />
           </Button>

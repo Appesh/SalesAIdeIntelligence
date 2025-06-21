@@ -314,13 +314,144 @@
 
   /* Enhanced Chat interface improvements */
   .chat-container {
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .chat-container {
+      max-width: 400px;
+    }
   }
 
   @media (min-width: 1024px) {
     .chat-container {
       margin: 0;
+    }
+  }
+
+  /* Mobile-first responsive improvements */
+
+  /* Touch targets - minimum 44px for mobile accessibility */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Mobile-optimized text sizes */
+  @media (max-width: 767px) {
+    .mobile-text-sm {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    .mobile-text-base {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    .mobile-text-lg {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  @media (max-width: 767px) {
+    body {
+      overflow-x: hidden;
+    }
+
+    * {
+      max-width: 100%;
+    }
+  }
+
+  /* Mobile-friendly spacing */
+  @media (max-width: 767px) {
+    .mobile-px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .mobile-py-3 {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .mobile-gap-3 {
+      gap: 0.75rem;
+    }
+  }
+
+  /* Improved mobile button styles */
+  @media (max-width: 767px) {
+    .btn-mobile-full {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-mobile-lg {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      min-height: 44px;
+    }
+  }
+
+  /* Mobile-optimized animations */
+  @media (max-width: 767px) {
+    /* Reduce motion for better mobile performance */
+    .animate-bounce-slow {
+      animation-duration: 4s;
+    }
+
+    .animate-float {
+      animation-duration: 8s;
+    }
+
+    /* Faster transitions on mobile */
+    .transition-all {
+      transition-duration: 200ms;
+    }
+
+    /* Disable hover effects on touch devices */
+    .hover\:scale-105:hover {
+      transform: none;
+    }
+
+    .card-hover:hover {
+      transform: none;
+    }
+  }
+
+  /* Chat slide-up animation for mobile */
+  .chat-slide-up {
+    animation: slideUpMobile 0.3s ease-out;
+  }
+
+  @keyframes slideUpMobile {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Mobile-specific layout utilities */
+  @media (max-width: 767px) {
+    .mobile-stack > * + * {
+      margin-top: 1rem;
+    }
+
+    .mobile-center {
+      text-align: center;
+    }
+
+    .mobile-full-width {
+      width: 100%;
     }
   }
 

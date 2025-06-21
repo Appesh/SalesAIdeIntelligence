@@ -83,25 +83,26 @@ export function Navigation({ currentSection }: NavigationProps) {
           variant="ghost"
           size="sm"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-gray-600 hover:text-gray-900"
+          className="text-gray-600 hover:text-gray-900 p-2 h-10 w-10"
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </Button>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg border-t z-50">
-          <div className="px-4 py-6 space-y-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t z-50 backdrop-blur-lg bg-white/95">
+          <div className="px-4 py-6 space-y-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
             {navItems.map((item) => (
               item.href.startsWith("#") ? (
                 <button
                   key={item.href}
                   onClick={() => handleNavigation(item.href)}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-base font-medium transition-colors rounded-lg min-h-[44px] ${
                     isActivePage(item.href)
-                      ? "text-primary"
-                      : "text-gray-600 hover:text-primary"
+                      ? "text-primary bg-primary/10"
+                      : "text-gray-600 hover:text-primary hover:bg-gray-50"
                   }`}
                 >
                   {item.label}
@@ -110,10 +111,10 @@ export function Navigation({ currentSection }: NavigationProps) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-base font-medium transition-colors rounded-lg min-h-[44px] ${
                     isActivePage(item.href)
-                      ? "text-primary"
-                      : "text-gray-600 hover:text-primary"
+                      ? "text-primary bg-primary/10"
+                      : "text-gray-600 hover:text-primary hover:bg-gray-50"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -121,13 +122,15 @@ export function Navigation({ currentSection }: NavigationProps) {
                 </Link>
               )
             ))}
-            <Link
-              href="/contact-us"
-              className="w-full bg-primary text-white hover:bg-secondary px-4 py-2 rounded-md font-medium transition-colors inline-flex items-center justify-center"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact Us
-            </Link>
+            <div className="pt-2 mt-2 border-t border-gray-200">
+              <Link
+                href="/contact-us"
+                className="block w-full text-center bg-primary text-white hover:bg-secondary px-4 py-3 rounded-lg font-medium transition-colors min-h-[44px] flex items-center justify-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       )}

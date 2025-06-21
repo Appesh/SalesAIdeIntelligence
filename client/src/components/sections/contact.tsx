@@ -69,46 +69,46 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <section id="contact" className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Start Your Effortless Growth Journey
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             Join 500+ retail businesses already using SalesAIde to turn slow months into growth months. See results in your first week.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start lg:items-center">
+          <div className="space-y-6 sm:space-y-8">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
-                <Phone className="text-white" size={20} />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                <Phone className="text-white" size={18} />
               </div>
-              <div>
-                <h3 className="font-semibold text-gray-900">Call Us</h3>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
+              <div className="min-w-0">
+                <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Call Us</h3>
+                <p className="text-gray-600 text-sm sm:text-base">+1 (555) 123-4567</p>
               </div>
             </div>
 
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mr-4">
-                <Mail className="text-white" size={20} />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                <Mail className="text-white" size={18} />
               </div>
-              <div>
-                <h3 className="font-semibold text-gray-900">Email Us</h3>
-                <p className="text-gray-600">hello@salesaide.com</p>
+              <div className="min-w-0">
+                <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Email Us</h3>
+                <p className="text-gray-600 text-sm sm:text-base break-all">hello@salesaide.com</p>
               </div>
             </div>
 
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-success rounded-lg flex items-center justify-center mr-4">
-                <MapPin className="text-white" size={20} />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-success rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                <MapPin className="text-white" size={18} />
               </div>
-              <div>
-                <h3 className="font-semibold text-gray-900">Visit Us</h3>
-                <p className="text-gray-600">123 Tech Street, San Francisco, CA 94105</p>
+              <div className="min-w-0">
+                <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Visit Us</h3>
+                <p className="text-gray-600 text-sm sm:text-base">123 Tech Street, San Francisco, CA 94105</p>
               </div>
             </div>
 
@@ -137,11 +137,11 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="lg:order-last">
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Get Started Today</h3>
-              
-              <div className="space-y-6">
+          <div className="lg:order-last mt-8 lg:mt-0">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Get Started Today</h3>
+
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <Label htmlFor="name">Full Name *</Label>
                   <Input
