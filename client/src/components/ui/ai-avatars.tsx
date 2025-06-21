@@ -58,8 +58,8 @@ export function AIAvatars() {
 
 export function FloatingAvatars() {
   return (
-    <div className="fixed bottom-6 right-6 z-40">
-      <div className="flex space-x-2">
+    <div className="fixed bottom-6 left-6 z-40">
+      <div className="flex flex-col space-y-2">
         {avatars.slice(0, 2).map((avatar, index) => (
           <div
             key={index}

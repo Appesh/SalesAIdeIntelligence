@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  # SalesAIde Application
-  salesaide:
+  # Motivio Application
+  motivio:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
       - NODE_ENV=production
       - PORT=5000
       - HOST=0.0.0.0
-      - DATABASE_URL=postgresql://salesaide:salesaide_password@postgres:5432/salesaide
+      - DATABASE_URL=postgresql://motivio:motivio_password@postgres:5432/motivio
       - SESSION_SECRET=your-super-secret-session-key-change-this-in-production-please
       - CORS_ORIGIN=http://localhost:5000
       - RATE_LIMIT_WINDOW_MS=900000
@@ -24,7 +24,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     networks:
-      - salesaide-network
+      - motivio-network
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
       interval: 30s
@@ -35,11 +35,11 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: salesaide-postgres
+    container_name: motivio-postgres
     environment:
-      - POSTGRES_DB=salesaide
-      - POSTGRES_USER=salesaide
-      - POSTGRES_PASSWORD=salesaide_password
+      - POSTGRES_DB=motivio
+      - POSTGRES_USER=motivio
+      - POSTGRES_PASSWORD=motivio_password
       - POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=C
     ports:
       - "5432:5432"
@@ -50,19 +50,19 @@ services:
       - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U salesaide -d salesaide"]
+      test: ["CMD-SHELL", "pg_isready -U motivio -d motivio"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
-      - salesaide-network
+      - motivio-network
 
   # pgAdmin for database management (development only)
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: salesaide-pgadmin
+    container_name: motivio-pgadmin
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@salesaide.local
+      - PGADMIN_DEFAULT_EMAIL=admin@motivio.local
       - PGADMIN_DEFAULT_PASSWORD=admin123
       - PGADMIN_CONFIG_SERVER_MODE=False
     ports:
@@ -74,14 +74,14 @@ services:
       - postgres
     restart: unless-stopped
     networks:
-      - salesaide-network
+      - motivio-network
     profiles:
       - dev
 
   # Redis (optional, for session storage in production)
   redis:
     image: redis:7-alpine
-    container_name: salesaide-redis
+    container_name: motivio-redis
     ports:
       - "6379:6379"
     restart: unless-stopped
@@ -91,7 +91,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - salesaide-network
+      - motivio-network
     profiles:
       - redis
 
@@ -102,5 +102,5 @@ volumes:
     driver: local
 
 networks:
-  salesaide-network:
+  motivio-network:
     driver: bridge

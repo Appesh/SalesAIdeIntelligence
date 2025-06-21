@@ -169,7 +169,7 @@ export default function WhyChooseUs() {
                     Tailored Solutions, Not Generic Advice
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    Unlike one-size-fits-all solutions, SalesAIde creates customized AI strategies built specifically for your unique data, market conditions, and business objectives. Our comprehensive customization process ensures optimal performance from day one.
+                    Unlike one-size-fits-all solutions, Motivio creates customized AI strategies built specifically for your unique data, market conditions, and business objectives. Our comprehensive customization process ensures optimal performance from day one.
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-start">

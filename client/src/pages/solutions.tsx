@@ -197,7 +197,7 @@ export default function Solutions() {
                     Content Creation for Enhanced Engagement
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    Stay ahead of the curve with SalesAIde's Generative AI that creates compelling, high-quality marketing content at scale. Produce content that resonates with customers and drives conversions automatically.
+                    Stay ahead of the curve with Motivio's Generative AI that creates compelling, high-quality marketing content at scale. Produce content that resonates with customers and drives conversions automatically.
                   </p>
                   <ul className="space-y-4">
                     <li className="flex items-start">
@@ -258,7 +258,7 @@ export default function Solutions() {
                 Ready to Transform Your Retail Business?
               </h2>
               <p className="text-xl mb-8 text-blue-100">
-                Start your free trial and see how SalesAIde's AI solutions can boost your sales by 40% in the first month.
+                Start your free trial and see how Motivio's AI solutions can boost your sales by 40% in the first month.
               </p>
               <Button
                 onClick={navigateToContact}

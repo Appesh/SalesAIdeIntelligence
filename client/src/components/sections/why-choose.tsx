@@ -74,7 +74,7 @@ export function WhyChoose() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Why Choose <span className="gradient-wegic bg-clip-text text-transparent gradient-text-force">SalesAIde</span>?
+            Why Choose <span className="gradient-wegic bg-clip-text text-transparent gradient-text-force">Motivio</span>?
           </h2>
           <p className="text-xl text-gray-200 max-w-3xl mx-auto">
             Join hundreds of retail businesses that have transformed their sales performance with our AI-powered platform.
@@ -112,7 +112,7 @@ export function WhyChoose() {
                 </div>
               </div>
               <blockquote className="text-xl leading-relaxed mb-6 font-medium">
-                "SalesAIde transformed our business completely. We went from struggling during slow seasons to consistently hitting our targets. The AI insights are incredibly accurate and actionable."
+                "Motivio transformed our business completely. We went from struggling during slow seasons to consistently hitting our targets. The AI insights are incredibly accurate and actionable."
               </blockquote>
               <div className="flex items-center">
                 <div className="flex text-wegic-yellow mr-2">

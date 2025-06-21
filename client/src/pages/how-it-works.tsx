@@ -54,7 +54,7 @@ export default function HowItWorks() {
                     Step 1: Data-Driven Insights
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    SalesAIde's proprietary AI analyzes your comprehensive business data to uncover hidden patterns and opportunities. Our advanced algorithms process multiple data streams to deliver actionable, clearly presented insights that drive immediate results.
+                    Motivio's proprietary AI analyzes your comprehensive business data to uncover hidden patterns and opportunities. Our advanced algorithms process multiple data streams to deliver actionable, clearly presented insights that drive immediate results.
                   </p>
                   
                   <div className="space-y-4 mb-6">
@@ -194,7 +194,7 @@ export default function HowItWorks() {
                     Step 2: Generative AI for Content
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    Accelerate content creation from weeks to minutes with SalesAIde. Our Generative AI produces fresh, high-quality marketing content that perfectly aligns with your business goals and resonates with your target customers.
+                    Accelerate content creation from weeks to minutes with Motivio. Our Generative AI produces fresh, high-quality marketing content that perfectly aligns with your business goals and resonates with your target customers.
                   </p>
                   
                   <div className="space-y-4 mb-6">
@@ -257,7 +257,7 @@ export default function HowItWorks() {
                     Step 3: Strategic Timing & Continuous Optimization
                   </h3>
                   <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                    SalesAIde's predictive algorithms determine optimal release windows for maximum impact. Our system continuously monitors performance, learns from real-time data, and refines strategies to ensure sustained growth and competitive advantage.
+                    Motivio's predictive algorithms determine optimal release windows for maximum impact. Our system continuously monitors performance, learns from real-time data, and refines strategies to ensure sustained growth and competitive advantage.
                   </p>
                   
                   <div className="space-y-4 mb-6">
@@ -297,7 +297,7 @@ export default function HowItWorks() {
                   <div className="bg-purple-50 rounded-lg p-4">
                     <h5 className="font-semibold text-purple-600 mb-2">Continuous Optimization Commitment:</h5>
                     <p className="text-gray-700">
-                      <strong>SalesAIde isn't a one-off solution.</strong> Our system continuously monitors performance, learns from real-time data, and refines strategies to adapt to changing market conditions, customer behavior, and business objectives. Your competitive advantage grows stronger every day.
+                      <strong>Motivio isn't a one-off solution.</strong> Our system continuously monitors performance, learns from real-time data, and refines strategies to adapt to changing market conditions, customer behavior, and business objectives. Your competitive advantage grows stronger every day.
                     </p>
                   </div>
                 </div>

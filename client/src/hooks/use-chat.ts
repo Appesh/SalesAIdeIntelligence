@@ -179,59 +179,99 @@ export function useChat() {
       };
     });
 
-    // Generate enhanced agent response after a delay
-    setTimeout(() => {
+    // Generate enhanced agent response after a delay (now async)
+    setTimeout(async () => {
       console.log('Generating agent response for:', content);
 
-      setChatState(prev => {
-        if (!prev.session) {
+      try {
+        // Get current session state for context using setChatState callback
+        let currentContext: ConversationContext | null = null;
+
+        setChatState(prev => {
+          if (prev.session) {
+            currentContext = {
+              previousMessages: prev.session.messages,
+              userInfo: prev.session.userInfo,
+              sessionContext: prev.session.context
+            };
+          }
+          return prev; // Don't change state, just capture context
+        });
+
+        if (!currentContext) {
           console.log('No session found for agent response');
-          return prev;
+          return;
         }
 
-        // Create conversation context
-        const context: ConversationContext = {
-          previousMessages: prev.session.messages,
-          userInfo: prev.session.userInfo,
-          sessionContext: prev.session.context
-        };
+        console.log('Context for agent response:', currentContext);
 
-        console.log('Context for agent response:', context);
-
-        const agentResponse = chatService.generateResponse(content, context);
+        // Generate response using hybrid AI
+        const agentResponse = await chatService.generateResponse(content, currentContext);
         console.log('Generated agent response:', agentResponse);
 
-        const agentMessage: ChatMessage = {
-          id: generateId(),
-          content: agentResponse.content,
-          sender: 'agent',
-          timestamp: new Date(),
-          type: agentResponse.type || 'text',
-          options: agentResponse.options,
-        };
+        // Update state with agent response
+        setChatState(prev => {
+          if (!prev.session) return prev;
 
-        const updatedSession = {
-          ...prev.session,
-          messages: [...prev.session.messages, agentMessage],
-          context: {
-            ...prev.session.context,
-            ...agentResponse.contextUpdate
-          },
-          userInfo: {
-            ...prev.session.userInfo,
-            ...agentResponse.userInfoUpdate
-          }
-        };
+          const agentMessage: ChatMessage = {
+            id: generateId(),
+            content: agentResponse.content,
+            sender: 'agent',
+            timestamp: new Date(),
+            type: agentResponse.type || 'text',
+            options: agentResponse.options,
+          };
 
-        console.log('Final updated session:', updatedSession);
+          const updatedSession = {
+            ...prev.session,
+            messages: [...prev.session.messages, agentMessage],
+            context: {
+              ...prev.session.context,
+              ...agentResponse.contextUpdate
+            },
+            userInfo: {
+              ...prev.session.userInfo,
+              ...agentResponse.userInfoUpdate
+            }
+          };
 
-        return {
-          ...prev,
-          session: updatedSession,
-          isTyping: false,
-          unreadCount: prev.isOpen ? 0 : prev.unreadCount + 1,
-        };
-      });
+          console.log('Final updated session:', updatedSession);
+
+          return {
+            ...prev,
+            session: updatedSession,
+            isTyping: false,
+            unreadCount: prev.isOpen ? 0 : prev.unreadCount + 1,
+          };
+        });
+
+      } catch (error) {
+        console.error('Error generating agent response:', error);
+
+        // Fallback error message
+        setChatState(prev => {
+          if (!prev.session) return prev;
+
+          const errorMessage: ChatMessage = {
+            id: generateId(),
+            content: "I apologize, but I'm having trouble processing your request right now. Please try again or contact our support team.",
+            sender: 'agent',
+            timestamp: new Date(),
+            type: 'options',
+            options: ['Try again', 'Contact support', 'Continue chatting'],
+          };
+
+          return {
+            ...prev,
+            session: {
+              ...prev.session,
+              messages: [...prev.session.messages, errorMessage]
+            },
+            isTyping: false,
+            unreadCount: prev.isOpen ? 0 : prev.unreadCount + 1,
+          };
+        });
+      }
     }, 1000); // Fixed 1 second delay for debugging
   }, [chatService]);
 

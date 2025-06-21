@@ -75,7 +75,7 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
             <Users className="h-6 w-6 text-primary" />
-            SalesAIde Admin Dashboard
+            Motivio Admin Dashboard
           </h2>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="h-4 w-4" />

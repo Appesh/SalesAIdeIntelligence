@@ -143,11 +143,11 @@ export function Works() {
         {/* Stats section */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div className="bg-white rounded-2xl p-6 shadow-lg card-hover">
-            <div className="text-4xl font-black text-wegic-purple mb-2">230</div>
+            <div className="text-4xl font-black text-wegic-purple mb-2">50+</div>
             <div className="text-gray-600 font-medium">Countries and regions covered</div>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-lg card-hover">
-            <div className="text-4xl font-black text-wegic-pink mb-2">500,000+</div>
+            <div className="text-4xl font-black text-wegic-pink mb-2">25,000+</div>
             <div className="text-gray-600 font-medium">Sales optimized</div>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-lg card-hover">

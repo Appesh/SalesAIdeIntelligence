@@ -38,7 +38,7 @@ Your SalesAIde application is now **PRODUCTION READY** with the following enhanc
 ```bash
 # 1. Clone and setup
 git clone <your-repo-url>
-cd SalesAIdeIntelligence
+cd motivio
 
 # 2. Configure environment
 cp .env.example .env
@@ -48,7 +48,7 @@ cp .env.example .env
 docker-compose up -d
 
 # 4. Check status
-docker-compose logs -f salesaide
+docker-compose logs -f motivio
 curl http://localhost:5000/health
 ```
 

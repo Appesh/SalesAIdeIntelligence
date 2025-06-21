@@ -6,7 +6,7 @@ export function TypingIndicator() {
         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
       </div>
-      <span className="text-sm text-gray-500 ml-2">SalesAIde assistant is typing...</span>
+      <span className="text-sm text-gray-500 ml-2">Motivio assistant is typing...</span>
     </div>
   );
 }

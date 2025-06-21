@@ -1,9 +1,28 @@
 import { ConversationContext, AgentResponse } from './types';
+import { AIService } from './ai';
 
-// Enhanced AI Agent Service with context awareness and sophisticated conversation flows
+// Enhanced Hybrid AI Agent Service with context awareness and sophisticated conversation flows
 export class ChatService {
   private static instance: ChatService;
-  
+  private aiService: AIService;
+  private useHybridAI: boolean = true;
+
+  private constructor() {
+    this.aiService = AIService.getInstance();
+    console.log('🔧 ChatService constructor: Initializing AI service...');
+
+    // Initialize AI service in the background
+    this.aiService.initialize()
+      .then(() => {
+        console.log('✅ ChatService: AI Service initialized successfully');
+        this.useHybridAI = true;
+      })
+      .catch(error => {
+        console.error('❌ ChatService: AI Service initialization failed, falling back to business logic only:', error);
+        this.useHybridAI = false;
+      });
+  }
+
   public static getInstance(): ChatService {
     if (!ChatService.instance) {
       ChatService.instance = new ChatService();
@@ -113,30 +132,122 @@ export class ChatService {
     return painPoints;
   }
 
-  // Generate contextual response based on conversation history and intent
-  public generateResponse(userMessage: string, context: ConversationContext): AgentResponse {
-    const { intent, confidence } = this.detectIntent(userMessage, context);
-    const businessSize = this.detectBusinessSize(userMessage, context);
-    const painPoints = this.extractPainPoints(userMessage);
-    
-    // Update context based on detected information
+  // Extract context updates from AI response metadata
+  private extractContextUpdate(metadata: any, userMessage: string, context: ConversationContext): any {
     const contextUpdate: any = {};
-    const userInfoUpdate: any = {};
-    
+
+    // Use AI-detected intent or fall back to business logic
+    const intent = metadata?.intent || metadata?.businessLogicIntent || this.detectIntent(userMessage, context).intent;
+    contextUpdate.currentTopic = intent;
+    contextUpdate.userIntent = intent;
+
+    // Extract business size from AI metadata or message
+    const businessSize = this.detectBusinessSize(userMessage, context);
     if (businessSize) {
       contextUpdate.businessSize = businessSize;
     }
-    
+
+    // Extract pain points
+    const painPoints = this.extractPainPoints(userMessage);
     if (painPoints.length > 0) {
       contextUpdate.painPoints = [...(context.sessionContext?.painPoints || []), ...painPoints];
     }
-    
+
+    // Update qualification stage based on intent
+    if (intent === 'greeting') {
+      contextUpdate.qualificationStage = 'needs-assessment';
+    } else if (intent === 'sales_optimization' || intent === 'inventory_management' || intent === 'customer_analytics') {
+      contextUpdate.qualificationStage = 'solution-matching';
+    } else if (intent === 'pricing_inquiry' || intent === 'contact_sharing') {
+      contextUpdate.qualificationStage = 'lead-capture';
+    } else if (intent === 'demo_request') {
+      contextUpdate.qualificationStage = 'demo-scheduling';
+    }
+
+    return contextUpdate;
+  }
+
+  // Extract user info updates from AI response metadata
+  private extractUserInfoUpdate(metadata: any, userMessage: string): any {
+    const userInfoUpdate: any = {};
+
+    // Extract email if mentioned
+    const emailMatch = userMessage.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/);
+    if (emailMatch) {
+      userInfoUpdate.email = emailMatch[0];
+    }
+
+    // Extract business type from AI metadata
+    if (metadata?.businessContext) {
+      userInfoUpdate.businessType = metadata.businessContext;
+    }
+
+    return userInfoUpdate;
+  }
+
+  // Generate contextual response based on conversation history and intent
+  public async generateResponse(userMessage: string, context: ConversationContext): Promise<AgentResponse> {
+    console.log('🤖 ChatService.generateResponse called with:', { userMessage, context, useHybridAI: this.useHybridAI });
+
+    try {
+      // Try hybrid AI first if available
+      if (this.useHybridAI) {
+        console.log('🚀 Attempting hybrid AI response...');
+        const aiResponse = await this.aiService.generateChatResponse(userMessage, context);
+        console.log('✅ Hybrid AI response received:', aiResponse);
+
+        // Convert AI response to AgentResponse format
+        const agentResponse: AgentResponse = {
+          content: aiResponse.content,
+          type: aiResponse.type,
+          options: aiResponse.options,
+          contextUpdate: this.extractContextUpdate(aiResponse.metadata, userMessage, context),
+          userInfoUpdate: this.extractUserInfoUpdate(aiResponse.metadata, userMessage),
+        };
+
+        console.log('✅ Generated hybrid AI response:', agentResponse);
+        return agentResponse;
+      } else {
+        console.log('⚠️ Hybrid AI is disabled, using business logic');
+      }
+    } catch (error) {
+      console.error('❌ Hybrid AI failed, falling back to business logic:', error);
+      this.useHybridAI = false; // Disable for this session
+    }
+
+    // Fallback to original business logic
+    console.log('📋 Using business logic fallback');
+    const businessResponse = this.generateBusinessLogicResponse(userMessage, context);
+    console.log('📋 Business logic response:', businessResponse);
+    return businessResponse;
+  }
+
+  // Original business logic as fallback
+  private generateBusinessLogicResponse(userMessage: string, context: ConversationContext): AgentResponse {
+    const { intent, confidence } = this.detectIntent(userMessage, context);
+    console.log('🔍 Intent detection result:', { intent, confidence, userMessage });
+
+    const businessSize = this.detectBusinessSize(userMessage, context);
+    const painPoints = this.extractPainPoints(userMessage);
+
+    // Update context based on detected information
+    const contextUpdate: any = {};
+    const userInfoUpdate: any = {};
+
+    if (businessSize) {
+      contextUpdate.businessSize = businessSize;
+    }
+
+    if (painPoints.length > 0) {
+      contextUpdate.painPoints = [...(context.sessionContext?.painPoints || []), ...painPoints];
+    }
+
     contextUpdate.currentTopic = intent;
     contextUpdate.userIntent = intent;
-    
+
     // Generate response based on intent and qualification stage
     const currentStage = context.sessionContext?.qualificationStage || 'initial';
-    
+
     return this.generateResponseByIntent(intent, confidence, currentStage, context, {
       contextUpdate,
       userInfoUpdate
@@ -144,13 +255,14 @@ export class ChatService {
   }
 
   private generateResponseByIntent(
-    intent: string, 
-    confidence: number, 
-    stage: string, 
+    intent: string,
+    confidence: number,
+    stage: string,
     context: ConversationContext,
     updates: { contextUpdate: any; userInfoUpdate: any }
   ): AgentResponse {
-    
+    console.log('🎯 Generating response for intent:', { intent, confidence, stage });
+
     switch (intent) {
       case 'greeting':
         return this.handleGreeting(context, updates);

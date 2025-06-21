@@ -10,6 +10,25 @@ interface ChatMessageProps {
   onLeadCapture?: (data: any) => void;
 }
 
+// Function to clean message content and display as plain text
+function cleanMessageContent(content: string): string {
+  let cleaned = content;
+
+  // Remove all HTML tags and malformed HTML fragments
+  cleaned = cleaned.replace(/<[^>]*>/g, ''); // Remove all HTML tags
+  cleaned = cleaned.replace(/[^<]*font-weight:\s*\d+;\s*color:\s*#[0-9A-Fa-f]{6}[^>]*>/g, ''); // Remove malformed style attributes
+  cleaned = cleaned.replace(/"\s*font-weight:\s*\d+;\s*color:\s*#[0-9A-Fa-f]{6}[^>]*>/g, '"'); // Clean up quotes with styles
+  cleaned = cleaned.replace(/"\s*style="[^"]*">/g, ''); // Remove orphaned style attributes
+  cleaned = cleaned.replace(/[^<\s]*font-weight[^>]*>/g, ''); // Remove any remaining font-weight fragments
+  cleaned = cleaned.replace(/[^<\s]*color:\s*#[0-9A-Fa-f]{6}[^>]*>/g, ''); // Remove color fragments
+
+  // Remove markdown formatting symbols for clean display
+  cleaned = cleaned.replace(/\*\*([^*]+)\*\*/g, '$1'); // Remove ** bold markers
+  cleaned = cleaned.replace(/\*([^*]+)\*/g, '$1'); // Remove * italic markers
+
+  return cleaned;
+}
+
 export function ChatMessage({ message, onOptionClick, onLeadCapture }: ChatMessageProps) {
   const isAgent = message.sender === 'agent';
   
@@ -33,7 +52,9 @@ export function ChatMessage({ message, onOptionClick, onLeadCapture }: ChatMessa
             }
           `}
         >
-          <p className="whitespace-pre-wrap">{message.content}</p>
+          <div className="whitespace-pre-wrap">
+            {cleanMessageContent(message.content)}
+          </div>
         </div>
         
         {message.type === 'options' && message.options && (

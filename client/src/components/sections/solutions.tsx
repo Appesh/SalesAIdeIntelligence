@@ -55,7 +55,7 @@ export function Solutions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-            Key Benefits: Why Retail Leaders Choose <span className="gradient-wegic bg-clip-text text-transparent gradient-text-force">SalesAIde</span>
+            Key Benefits: Why Retail Leaders Choose <span className="gradient-wegic bg-clip-text text-transparent gradient-text-force">Motivio</span>
           </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
             Our automated retail solutions deliver measurable results across every aspect of your business. No manual work required.

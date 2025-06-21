@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import { ChatService } from '@/lib/chatService';
+import { ConversationContext } from '@/lib/types';
 
 interface Message {
   id: string;
@@ -10,6 +12,40 @@ interface Message {
 interface SimpleChatWidgetProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+// Component to display message content as plain text
+function FormattedMessage({ content, sender }: { content: string; sender: 'user' | 'bot' }) {
+  // Clean up any HTML/malformed content and display as plain text
+  const cleanText = (text: string): string => {
+    let cleaned = text;
+
+    // Remove all HTML tags and malformed HTML fragments
+    cleaned = cleaned.replace(/<[^>]*>/g, ''); // Remove all HTML tags
+    cleaned = cleaned.replace(/[^<]*font-weight:\s*\d+;\s*color:\s*#[0-9A-Fa-f]{6}[^>]*>/g, ''); // Remove malformed style attributes
+    cleaned = cleaned.replace(/"\s*font-weight:\s*\d+;\s*color:\s*#[0-9A-Fa-f]{6}[^>]*>/g, '"'); // Clean up quotes with styles
+    cleaned = cleaned.replace(/"\s*style="[^"]*">/g, ''); // Remove orphaned style attributes
+    cleaned = cleaned.replace(/[^<\s]*font-weight[^>]*>/g, ''); // Remove any remaining font-weight fragments
+    cleaned = cleaned.replace(/[^<\s]*color:\s*#[0-9A-Fa-f]{6}[^>]*>/g, ''); // Remove color fragments
+
+    // Remove markdown formatting symbols for clean display
+    cleaned = cleaned.replace(/\*\*([^*]+)\*\*/g, '$1'); // Remove ** bold markers
+    cleaned = cleaned.replace(/\*([^*]+)\*/g, '$1'); // Remove * italic markers
+
+    return cleaned;
+  };
+
+  const cleanedContent = cleanText(content);
+
+  return (
+    <div style={{
+      whiteSpace: 'pre-wrap',
+      lineHeight: '1.5',
+      color: sender === 'bot' ? '#374151' : 'inherit'
+    }}>
+      {cleanedContent}
+    </div>
+  );
 }
 
 // Enhanced styles for better UI/UX
@@ -66,6 +102,9 @@ const chatWidgetStyles = {
     fontSize: '20px',
     border: '2px solid rgba(255, 255, 255, 0.3)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(10px)',
+    position: 'relative' as const,
+    overflow: 'hidden',
   },
   closeButton: {
     background: 'rgba(255, 255, 255, 0.2)',
@@ -102,20 +141,21 @@ const messageStyles = {
   }),
   message: (sender: 'user' | 'bot') => ({
     maxWidth: '85%',
-    padding: '12px 16px',
+    padding: '14px 18px',
     borderRadius: sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
     background: sender === 'user'
       ? 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%)'
-      : 'rgba(248, 250, 252, 0.8)',
+      : 'rgba(248, 250, 252, 0.9)',
     color: sender === 'user' ? 'white' : '#374151',
     fontSize: '14px',
-    lineHeight: '1.5',
+    lineHeight: '1.6',
     boxShadow: sender === 'user'
       ? '0 4px 12px rgba(139, 92, 246, 0.3)'
       : '0 2px 8px rgba(0, 0, 0, 0.1)',
     border: sender === 'bot' ? '1px solid rgba(0, 0, 0, 0.05)' : 'none',
     backdropFilter: 'blur(10px)',
     position: 'relative' as const,
+    wordBreak: 'break-word' as const,
   }),
   inputContainer: {
     padding: '20px',
@@ -169,7 +209,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "👋 Hi! I'm your Motivio assistant. How can I help you today?",
+      text: "👋 Hi! I'm your Motivio assistant powered by AI. How can I help you today?",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -177,6 +217,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatService = ChatService.getInstance();
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -192,7 +233,7 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage: Message = {
@@ -202,21 +243,57 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
       timestamp: new Date()
     };
 
+    console.log('💬 User message sent:', userMessage);
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputValue;
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate bot response with more realistic timing
-    setTimeout(() => {
+    try {
+      // Create conversation context from current messages
+      const context: ConversationContext = {
+        previousMessages: messages.map(msg => ({
+          id: msg.id,
+          content: msg.text,
+          sender: msg.sender === 'user' ? 'user' : 'agent',
+          timestamp: msg.timestamp,
+          type: 'text'
+        })),
+        userInfo: { businessType: 'retail' },
+        sessionContext: { qualificationStage: 'initial' }
+      };
+
+      console.log('🤖 Generating AI response for:', currentInput);
+      console.log('📋 Context:', context);
+
+      // Generate AI response
+      const agentResponse = await chatService.generateResponse(currentInput, context);
+      console.log('✅ AI response received:', agentResponse);
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: getBotResponse(inputValue),
+        text: agentResponse.content,
         sender: 'bot',
         timestamp: new Date()
       };
+
+      console.log('💬 Bot message created:', botMessage);
       setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('❌ Error generating AI response:', error);
+
+      // Fallback to hardcoded response
+      const fallbackMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I apologize, but I'm having trouble processing your request right now. Let me try to help you with our standard information. " + getBotResponse(currentInput),
+        sender: 'bot',
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, fallbackMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1200 + Math.random() * 800); // Variable response time for realism
+    }
   };
 
   const getBotResponse = (userInput: string): string => {
@@ -254,7 +331,42 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
           <div style={chatWidgetStyles.headerOverlay} />
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative', zIndex: 1 }}>
             <div style={chatWidgetStyles.avatar}>
-              🤖
+              {/* Enhanced AI Avatar with Brain Icon */}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  color: 'white',
+                  filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
+                  zIndex: 2,
+                  position: 'relative'
+                }}
+              >
+                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+                <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+                <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/>
+                <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/>
+                <path d="M3.477 10.896a4 4 0 0 1 .585-.396"/>
+                <path d="M19.938 10.5a4 4 0 0 1 .585.396"/>
+                <path d="M6 18a4 4 0 0 1-1.967-.516"/>
+                <path d="M19.967 17.484A4 4 0 0 1 18 18"/>
+              </svg>
+              {/* Subtle animated background */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
+                borderRadius: '50%',
+                animation: 'pulse 2s infinite',
+                zIndex: 1
+              }} />
             </div>
             <div>
               <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700', letterSpacing: '-0.025em' }}>
@@ -295,8 +407,8 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
               key={message.id}
               style={messageStyles.messageWrapper(message.sender)}
             >
-              <div style={messageStyles.message(message.sender)}>
-                {message.text}
+              <div style={messageStyles.message(message.sender)} className="chat-message">
+                <FormattedMessage content={message.text} sender={message.sender} />
               </div>
             </div>
           ))}
@@ -431,6 +543,60 @@ export function SimpleChatWidget({ isOpen, onClose }: SimpleChatWidgetProps) {
 
         div[style*="overflowY: auto"]::-webkit-scrollbar-thumb:hover {
           background: rgba(139, 92, 246, 0.5);
+        }
+
+        /* Enhanced formatting for message content */
+        .chat-message strong {
+          font-weight: 600 !important;
+          color: #6366F1 !important;
+        }
+
+        .chat-message em {
+          font-style: italic !important;
+          color: #8B5CF6 !important;
+        }
+
+        .chat-message p {
+          margin: 0 0 8px 0;
+        }
+
+        .chat-message p:last-child {
+          margin-bottom: 0;
+        }
+
+        /* Ensure inline formatting works properly */
+        .chat-message span[style*="color"] {
+          display: inline !important;
+        }
+
+        .chat-message div[dangerouslySetInnerHTML] {
+          line-height: 1.5;
+        }
+
+        /* Fix for nested formatting */
+        .chat-message * {
+          line-height: inherit;
+        }
+
+        /* Additional CSS to ensure proper rendering */
+        .chat-message [style*="font-weight"] {
+          font-weight: 600 !important;
+        }
+
+        .chat-message [style*="color: #6366F1"] {
+          color: #6366F1 !important;
+        }
+
+        .chat-message [style*="color: #8B5CF6"] {
+          color: #8B5CF6 !important;
+        }
+
+        .chat-message [style*="color: #059669"] {
+          color: #059669 !important;
+        }
+
+        .chat-message [style*="color: #6B7280"] {
+          color: #6B7280 !important;
         }
 
         /* Mobile responsive adjustments */

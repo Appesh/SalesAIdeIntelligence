@@ -1,4 +1,4 @@
-# 🚀 SalesAIde Development Server Restart Scripts
+# 🚀 Motivio Development Server Restart Scripts
 
 This directory contains multiple scripts to safely restart the development server by killing any existing services and starting fresh.
 

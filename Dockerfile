@@ -1,4 +1,4 @@
-# SalesAIde Production Dockerfile
+# Motivio Production Dockerfile
 FROM node:20-alpine AS base
 
 
@@ -28,7 +28,7 @@ ENV NODE_ENV=production
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 salesaide
+RUN adduser --system --uid 1001 motivio
 
 # Copy built application
 COPY --from=builder --chown=salesaide:nodejs /app/dist ./dist
