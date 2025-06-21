@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "buildCommand": "vite build",
-  "outputDirectory": "dist/public",
+  "buildCommand": "npm run build:simple",
+  "outputDirectory": "dist",
   "installCommand": "npm ci",
   "framework": null,
   "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "/index.html"
